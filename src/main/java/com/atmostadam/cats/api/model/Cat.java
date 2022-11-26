@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+/** A JSON object that represents the actual cat itself. */
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -32,6 +33,8 @@ public class Cat {
 
     @Max(2)
     private int age;
+
+    private boolean neutered;
 
     private boolean deceased;
 }
