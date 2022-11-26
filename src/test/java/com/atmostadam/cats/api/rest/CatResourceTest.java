@@ -1,4 +1,4 @@
-package com.atmostadam.cats.api;
+package com.atmostadam.cats.api.rest;
 
 import com.atmostadam.cats.api.rest.CatResource;
 import org.hamcrest.Matchers;

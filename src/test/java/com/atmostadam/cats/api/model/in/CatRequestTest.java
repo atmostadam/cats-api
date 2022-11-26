@@ -1,4 +1,4 @@
-package com.atmostadam.cats.api;
+package com.atmostadam.cats.api.model.in;
 
 
 import com.atmostadam.cats.api.model.Cat;
@@ -13,7 +13,7 @@ class CatRequestTest {
     Faker faker = Faker.instance();
 
     @Test
-    void microchipNumberLessThan9() {
+    void oneCat() {
         CatRequest request = new CatRequest();
         Cat cat = new Cat();
         cat.setMicrochipNumber(new SecureRandom().nextLong(9,15));
