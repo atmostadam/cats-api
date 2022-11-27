@@ -3,6 +3,7 @@ package com.atmostadam.cats.api.model;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.security.SecureRandom;
 import java.util.List;
