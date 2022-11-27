@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,8 +21,7 @@ public class CatRequest {
     private String id;
 
     @Valid
-    @NonNull
-    private List<Cat> cats;
+    private List<Cat> cats = new ArrayList<>();
 
     @Valid
     private Intake intake;
