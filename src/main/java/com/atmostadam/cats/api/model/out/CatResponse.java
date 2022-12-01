@@ -14,6 +14,9 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CatResponse {
     @NotBlank
+    private String transactionId;
+
+    @NotBlank
     private String message;
 
     private String stackTrace;

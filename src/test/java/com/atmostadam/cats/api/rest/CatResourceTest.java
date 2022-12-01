@@ -1,6 +1,8 @@
 package com.atmostadam.cats.api.rest;
 
 import com.atmostadam.cats.api.model.Cat;
+import com.atmostadam.cats.api.model.Microchip;
+import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,11 +49,18 @@ class CatResourceTest {
         expectedResponse.setMessage("Cat Found by Microchip Number.");
         expectedResponse.setCats(List.of(cat()));
 
-        when(restResource.queryByMicrochipNumber(431654132132657L))
+        CatMicrochipRequest request = new CatMicrochipRequest();
+        Microchip microchip = new Microchip();
+        microchip.setMicrochipNumber(431654132132657L);
+        request.setTransactionId("SIMULATED");
+        request.setMicrochip(microchip);
+
+        when(restResource.queryByMicrochipNumber(any(CatMicrochipRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(get("/cats/1.0/cat/431654132132657")
-                        .contentType(MediaType.APPLICATION_JSON))
+        MvcResult mvcResult = mockMvc.perform(get("/cats/1.0/cat")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -66,10 +75,10 @@ class CatResourceTest {
         expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        when(restResource.addCat(anyLong(), any(CatRequest.class)))
+        when(restResource.addCat(any(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat/431654132132657")
+        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
@@ -86,10 +95,10 @@ class CatResourceTest {
         expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        when(restResource.updateCat(anyLong(), any(CatRequest.class)))
+        when(restResource.updateCat(any(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(patch("/cats/1.0/cat/431654132132657")
+        MvcResult mvcResult = mockMvc.perform(patch("/cats/1.0/cat")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
@@ -106,11 +115,18 @@ class CatResourceTest {
         expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        when(restResource.deleteCat(431654132132657L))
+        CatMicrochipRequest request = new CatMicrochipRequest();
+        Microchip microchip = new Microchip();
+        microchip.setMicrochipNumber(431654132132657L);
+        request.setTransactionId("SIMULATED");
+        request.setMicrochip(microchip);
+
+        when(restResource.deleteCat(any(CatMicrochipRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(delete("/cats/1.0/cat/431654132132657")
-                        .contentType(MediaType.APPLICATION_JSON))
+        MvcResult mvcResult = mockMvc.perform(delete("/cats/1.0/cat")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -121,7 +137,9 @@ class CatResourceTest {
 
     private Cat cat() {
         Cat cat = new Cat();
-        cat.setMicrochipNumber(431654132132657L);
+        Microchip microchip = new Microchip();
+        microchip.setMicrochipNumber(431654132132657L);
+        cat.setMicrochip(microchip);
         cat.setName("Shelley");
         cat.setBreed("Domestic Shorthair");
         cat.setType("Calico");
@@ -135,7 +153,7 @@ class CatResourceTest {
 
     private CatRequest request() {
         CatRequest request = new CatRequest();
-        request.setId(UUID.randomUUID().toString());
+        request.setTransactionId(UUID.randomUUID().toString());
         request.getCats().add(cat());
         return request;
     }

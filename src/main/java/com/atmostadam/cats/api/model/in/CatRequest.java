@@ -18,7 +18,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CatRequest {
     @NotBlank
-    private String id;
+    private String transactionId;
 
     @Valid
     private List<Cat> cats = new ArrayList<>();
