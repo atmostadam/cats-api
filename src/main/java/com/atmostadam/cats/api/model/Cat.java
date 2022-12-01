@@ -25,7 +25,7 @@ public class Cat {
 
     private String primaryColor;
 
-    @Pattern(regexp = "[m,f,M,F]", message = "Cat must have a sex.")
+    @Pattern(regexp = "[mfMF]", message = "Cat must have a sex.")
     private String sex;
 
     @Max(value = 38, message = "Cat must be between 0 and 38 years old.")
