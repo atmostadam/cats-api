@@ -7,7 +7,12 @@ public class CatApiUtils {
     public static final ObjectMapper om = new ObjectMapper();
 
     @SneakyThrows
-    public static final String prettyPrint(Object o) {
+    public static final String sneakyPrettyPrint(Object o) {
         return om.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+    }
+
+    @SneakyThrows
+    public static final String sneakyDefaultPrint(Object o) {
+        return om.writeValueAsString(o);
     }
 }

@@ -1,9 +1,7 @@
 package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -11,6 +9,9 @@ import javax.validation.constraints.*;
 /** A JSON object that represents the actual cat itself. */
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cat {
     @Valid
