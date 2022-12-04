@@ -1,7 +1,10 @@
 package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * A JSON object that represents the location where the cat will be spayed or neutered and treated for

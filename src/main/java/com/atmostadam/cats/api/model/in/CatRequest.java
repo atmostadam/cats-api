@@ -1,8 +1,8 @@
 package com.atmostadam.cats.api.model.in;
 
 import com.atmostadam.cats.api.model.Cat;
-import com.atmostadam.cats.api.model.Intake;
 import com.atmostadam.cats.api.model.Delivery;
+import com.atmostadam.cats.api.model.Intake;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
