@@ -1,5 +1,6 @@
 package com.atmostadam.cats.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -8,7 +9,11 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-/** A JSON object that represents the actual cat itself. */
+/**
+ * A JSON object that represents the actual cat itself.
+ *
+ * @author Adam Johnston, Rachel Johnston
+ */
 @Getter
 @Setter
 @Builder
@@ -36,7 +41,23 @@ public class Cat {
     @Max(value = 38, message = "Cat must be between 0 and 38 years old.")
     private int age;
 
+    private boolean declawed;
+
     private boolean neutered;
 
     private boolean deceased;
+
+    private boolean purebread;
+
+    private boolean goodWithOtherPets;
+
+    private boolean goodWithKids;
+
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    public enum HairLength {
+        NONE,
+        SHORT,
+        MEDIUM,
+        LONG;
+    }
 }

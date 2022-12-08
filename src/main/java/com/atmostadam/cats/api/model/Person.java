@@ -18,6 +18,7 @@ public class Person {
         OWNER,
         ADOPTER,
         FOSTER,
+        VISITOR,
         VETERINARIAN,
         VET_TECH,
         VOLUNTEER,
