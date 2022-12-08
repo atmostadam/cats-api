@@ -1,4 +1,4 @@
-Adam's Personal GitHub Prototyping Repository for APIs
+Adam's Personal GitHub Prototyping Repository With Demo Showcase for APIs
  - Java
  - Spring Boot
  - Maven

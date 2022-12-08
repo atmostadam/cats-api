@@ -15,18 +15,40 @@ import javax.validation.Valid;
 @Api(tags = { "Cats API" })
 public interface CatResource {
     @GetMapping(value = "/1.0/cat")
-    @ApiOperation("This API queries for a cat by microchip number.")
+    @ApiOperation("This API queries for a cat by microchip number internally within our system.")
     ResponseEntity<CatResponse> queryByMicrochipNumber(@Valid @RequestBody CatMicrochipRequest cat);
 
     @PostMapping(value = "/1.0/cat")
-    @ApiOperation("This API adds a cat or list of cats.")
+    @ApiOperation("This API adds a cat or list of cats internally within our system.")
     ResponseEntity<CatResponse> addCat(@Valid @RequestBody CatRequest cat);
 
     @PatchMapping(value = "/1.0/cat")
-    @ApiOperation("This API updates a cat or list of cats.")
+    @ApiOperation("This API updates a cat or list of cats internally within our system.")
     ResponseEntity<CatResponse> updateCat(@Valid @RequestBody CatRequest cat);
 
     @DeleteMapping(value = "/1.0/cat")
-    @ApiOperation("This API deletes a cat by microchip number.")
+    @ApiOperation("This API deletes a cat by microchip number internally within our system.")
     ResponseEntity<CatResponse> deleteCat(@Valid @RequestBody CatMicrochipRequest cat);
+
+    @PostMapping(value = "/1.0/cat/onboard")
+    @ApiOperation("This API onboards a new cat or list of cats into the foster system of our charity.")
+    ResponseEntity<CatResponse> onboardCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> fosterCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> adoptCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> transferCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> shipCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> treatCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> microchipCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> postPetfinderCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> postAdoptAPetCat(@Valid @RequestBody CatRequest cat);
+
+    ResponseEntity<CatResponse> registerCat(@Valid @RequestBody CatRequest cat);
 }

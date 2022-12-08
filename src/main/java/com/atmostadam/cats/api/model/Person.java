@@ -2,11 +2,13 @@ package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person {
     private PersonType personType;
@@ -16,6 +18,7 @@ public class Person {
         OWNER,
         ADOPTER,
         FOSTER,
+        VISITOR,
         VETERINARIAN,
         VET_TECH,
         VOLUNTEER,

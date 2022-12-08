@@ -1,7 +1,6 @@
 package com.atmostadam.cats.api.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.Column;
@@ -16,6 +15,9 @@ import java.sql.Timestamp;
 @NamedQuery(name = "CatTable.queryByMicrochipNumber", query = "FROM CatEntity WHERE microchipNumber = :microchipNumber")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CatEntity {
     @Id
     @Column(name = "microchip_number")
@@ -34,6 +36,8 @@ public class CatEntity {
 
     private Integer age;
 
+    private Boolean neutered;
+
     private Boolean deceased;
 
     @Column(name = "created_timestamp")
@@ -41,6 +45,4 @@ public class CatEntity {
 
     @Column(name = "updated_timestamp")
     private Timestamp updatedTimestamp;
-
-    public CatEntity() {}
 }
