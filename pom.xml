@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.atmostadam.cats</groupId>
 	<artifactId>cats-api</artifactId>
 	<version>0.0.2</version>
+
 	<name>Cats API</name>
-	<description>Cats API</description>
+	<description>Cats API for Cat Charity Organization</description>
+	<url>atmostadam.com</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -20,6 +23,13 @@
 		<faker.version>1.0.2</faker.version>
 		<springfox.version>3.0.0</springfox.version>
 	</properties>
+
+	<developers>
+		<developer>
+			<name>Adam Johnston</name>
+			<url>atmostadam.com</url>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
@@ -86,4 +96,34 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<scm>
+		<connection>scm:git:https://github.com:atmostadam/cats-api.git</connection>
+		<developerConnection>scm:git:git@github.com:atmostadam/cats-api.git</developerConnection>
+		<url>https://github.com/atmostadam/cats-api</url>
+	</scm>
 </project>
