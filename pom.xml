@@ -121,6 +121,14 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+	</distributionManagement>
+
 	<scm>
 		<connection>scm:git:https://github.com:atmostadam/cats-api.git</connection>
 		<developerConnection>scm:git:git@github.com:atmostadam/cats-api.git</developerConnection>
