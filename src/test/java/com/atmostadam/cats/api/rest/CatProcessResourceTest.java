@@ -1,7 +1,5 @@
 package com.atmostadam.cats.api.rest;
 
-import com.atmostadam.cats.api.model.Microchip;
-import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.List;
 
 import static com.atmostadam.cats.api.test.CatTestData.cat;
+import static com.atmostadam.cats.api.test.CatTestData.request;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.isA;
@@ -28,11 +27,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 @MockitoSettings
-class CatResourceTest {
+public class CatProcessResourceTest {
     public static final ObjectMapper om = new ObjectMapper();
 
     @Mock
-    CatResource restResource;
+    CatProcessResource restResource;
 
     private MockMvc mockMvc;
 
@@ -42,23 +41,17 @@ class CatResourceTest {
     }
 
     @Test
-    void onboardCat() throws Exception {
+    void treatCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Found by Microchip Number.");
+        expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        CatMicrochipRequest request = new CatMicrochipRequest();
-        Microchip microchip = new Microchip();
-        microchip.setMicrochipNumber(431654132132657L);
-        request.setTransactionId("SIMULATED");
-        request.setMicrochip(microchip);
-
-        when(restResource.onboardCat(isA(CatRequest.class)))
+        when(restResource.treatCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat/onboard")
+        MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/medical")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request)))
+                        .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -68,23 +61,17 @@ class CatResourceTest {
     }
 
     @Test
-    void transferCat() throws Exception {
+    void microchipCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Found by Microchip Number.");
+        expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        CatMicrochipRequest request = new CatMicrochipRequest();
-        Microchip microchip = new Microchip();
-        microchip.setMicrochipNumber(431654132132657L);
-        request.setTransactionId("SIMULATED");
-        request.setMicrochip(microchip);
-
-        when(restResource.transferCat(isA(CatRequest.class)))
+        when(restResource.microchipCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat/transfer")
+        MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/microchip")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request)))
+                        .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -94,23 +81,17 @@ class CatResourceTest {
     }
 
     @Test
-    void fosterCat() throws Exception {
+    void postPetfinderCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Found by Microchip Number.");
+        expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        CatMicrochipRequest request = new CatMicrochipRequest();
-        Microchip microchip = new Microchip();
-        microchip.setMicrochipNumber(431654132132657L);
-        request.setTransactionId("SIMULATED");
-        request.setMicrochip(microchip);
-
-        when(restResource.fosterCat(isA(CatRequest.class)))
+        when(restResource.postPetfinderCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat/transfer/foster")
+        MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/petfinder")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request)))
+                        .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -120,23 +101,17 @@ class CatResourceTest {
     }
 
     @Test
-    void adoptCat() throws Exception {
+    void postAdoptAPetCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Found by Microchip Number.");
+        expectedResponse.setMessage("Cat Has Been Added to Database.");
         expectedResponse.setCats(List.of(cat()));
 
-        CatMicrochipRequest request = new CatMicrochipRequest();
-        Microchip microchip = new Microchip();
-        microchip.setMicrochipNumber(431654132132657L);
-        request.setTransactionId("SIMULATED");
-        request.setMicrochip(microchip);
-
-        when(restResource.adoptCat(isA(CatRequest.class)))
+        when(restResource.postAdoptAPetCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
 
-        MvcResult mvcResult = mockMvc.perform(post("/cats/1.0/cat/adopt")
+        MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/adoptapet")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request)))
+                        .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
                 .andReturn();
 

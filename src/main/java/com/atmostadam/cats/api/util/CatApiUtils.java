@@ -1,7 +1,6 @@
 package com.atmostadam.cats.api.util;
 
 import com.atmostadam.cats.api.entity.CatEntity;
-import com.atmostadam.cats.api.exception.CatException;
 import com.atmostadam.cats.api.model.Cat;
 import com.atmostadam.cats.api.model.Microchip;
 import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
@@ -19,6 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Simple utility class that can be used for easy conversion between API classes.
+ *
+ * @author Adam Johnston
+ */
 public class CatApiUtils {
     private CatApiUtils() {}
 
