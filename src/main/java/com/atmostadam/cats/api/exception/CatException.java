@@ -15,6 +15,10 @@ public class CatException extends Exception {
         super(message, cause);
     }
 
+    public CatException(Throwable cause) {
+        this(cause.getMessage(), cause);
+    }
+
     public CatException(String message, Throwable cause, Object... args) {
         super(String.format(message, args), cause);
     }
