@@ -15,6 +15,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -158,5 +161,47 @@ public class CatApiUtils {
     @SneakyThrows
     public static final String logResponseMessage(@NonNull ResponseEntity<CatResponse> response) {
         return String.format("RESPONSE: [%s]", prettyPrint(response));
+    }
+
+    public static final void writeCompare(StringBuilder sb,
+                                          Cat actual,
+                                          Cat expected) {
+        formatCompare(sb, "microchipNumber",
+                String.valueOf(actual.getMicrochip().getMicrochipNumber()),
+                String.valueOf(expected.getMicrochip().getMicrochipNumber()));
+        formatCompare(sb, "name", actual.getName(), expected.getName());
+
+        private String breed;
+
+        private String type;
+
+        private String primaryColor;
+
+        @Pattern(regexp = "[mfMF]", message = "Cat must be m, f, M or F")
+        @NotBlank(message = "Cat must have a sex.")
+        private String sex;
+
+        @Max(value = 38, message = "Cat must be between 0 and 38 years old.")
+        private int age;
+
+        private boolean declawed;
+
+        private boolean neutered;
+
+        private boolean deceased;
+
+        private boolean purebread;
+
+        private boolean goodWithOtherPets;
+
+        private boolean goodWithKids;
+
+    }
+
+    public static final String formatCompare(StringBuilder sb,
+                                        String parameter,
+                                        String actual,
+                                        String expected) {
+        return String.format("[%s] --> [%s] != [%s]\n", parameter, actual, expected);
     }
 }
