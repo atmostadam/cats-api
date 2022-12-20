@@ -45,7 +45,7 @@ class CatResourceTest {
     void onboardCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Found by Microchip Number.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();
@@ -71,7 +71,7 @@ class CatResourceTest {
     void transferCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Found by Microchip Number.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();
@@ -97,7 +97,7 @@ class CatResourceTest {
     void fosterCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Found by Microchip Number.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();
@@ -123,7 +123,7 @@ class CatResourceTest {
     void adoptCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Found by Microchip Number.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();

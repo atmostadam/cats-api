@@ -22,7 +22,7 @@ public class CatRequest {
     private String transactionId;
 
     @Valid
-    private List<Cat> cats = new ArrayList<>();
+    private final List<Cat> cats = new ArrayList<>();
 
     @Valid
     private Intake intake;

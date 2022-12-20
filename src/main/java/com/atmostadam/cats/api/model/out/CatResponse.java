@@ -23,5 +23,5 @@ public class CatResponse {
 
     private String stackTrace;
 
-    private List<Cat> cats = new ArrayList<>();
+    private final List<Cat> cats = new ArrayList<>();
 }

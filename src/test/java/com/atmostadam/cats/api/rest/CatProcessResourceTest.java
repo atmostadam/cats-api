@@ -44,7 +44,7 @@ public class CatProcessResourceTest {
     void treatCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.treatCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
@@ -64,7 +64,7 @@ public class CatProcessResourceTest {
     void microchipCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.microchipCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
@@ -84,7 +84,7 @@ public class CatProcessResourceTest {
     void postPetfinderCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.postPetfinderCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
@@ -104,7 +104,7 @@ public class CatProcessResourceTest {
     void postAdoptAPetCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.postAdoptAPetCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));

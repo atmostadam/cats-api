@@ -46,7 +46,7 @@ public class CatRegistrationResourceTest {
     void queryByMicrochipNumber() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Found by Microchip Number.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();
@@ -72,7 +72,7 @@ public class CatRegistrationResourceTest {
     void addCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.addCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
@@ -92,7 +92,7 @@ public class CatRegistrationResourceTest {
     void updateCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         when(restResource.updateCat(isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
@@ -112,7 +112,7 @@ public class CatRegistrationResourceTest {
     void deleteCat() throws Exception {
         CatResponse expectedResponse = new CatResponse();
         expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.setCats(List.of(cat()));
+        expectedResponse.getCats().add(cat());
 
         CatMicrochipRequest request = new CatMicrochipRequest();
         Microchip microchip = new Microchip();

@@ -15,9 +15,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,7 +83,7 @@ public class CatApiUtils {
                                                     @NonNull Exception exception) {
         CatResponse response = new CatResponse();
         response.setTransactionId(request.getTransactionId());
-        response.setCats(request.getCats());
+        response.getCats().addAll(request.getCats());
         StringBuilder microchips = new StringBuilder();
         request.getCats().forEach(e -> microchips.append(microchips).append(","));
         response.setMessage(String.format("Transaction ID [%s] microchip numbers [%s] exception message [%s]",
@@ -111,24 +108,24 @@ public class CatApiUtils {
     public static final ResponseEntity<CatResponse> successResponse(@NonNull String transactionId,
                                                                     String message,
                                                                     List<Cat> cats) {
-        return new ResponseEntity<>(CatResponse.builder()
+        CatResponse response = CatResponse.builder()
                 .transactionId(transactionId)
                 .message(message)
-                .cats(cats)
-                .build(),
-                HttpStatus.OK);
+                .build();
+        response.getCats().addAll(cats);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     public static final ResponseEntity<CatResponse> http500Response(@NonNull String transactionId,
                                                                     Exception exception,
                                                                     List<Cat> cats) {
-        return new ResponseEntity<>(CatResponse.builder()
+        CatResponse response = CatResponse.builder()
                 .transactionId(transactionId)
                 .message(exception.getMessage())
                 .stackTrace(ExceptionUtils.getStackTrace(exception))
-                .cats(cats)
-                .build(),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                .build();
+        response.getCats().addAll(cats);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public static final String concatMicrochips(@NonNull List<Cat> cats) {
@@ -163,45 +160,45 @@ public class CatApiUtils {
         return String.format("RESPONSE: [%s]", prettyPrint(response));
     }
 
-    public static final void writeCompare(StringBuilder sb,
-                                          Cat actual,
-                                          Cat expected) {
-        formatCompare(sb, "microchipNumber",
-                String.valueOf(actual.getMicrochip().getMicrochipNumber()),
-                String.valueOf(expected.getMicrochip().getMicrochipNumber()));
-        formatCompare(sb, "name", actual.getName(), expected.getName());
-
-        private String breed;
-
-        private String type;
-
-        private String primaryColor;
-
-        @Pattern(regexp = "[mfMF]", message = "Cat must be m, f, M or F")
-        @NotBlank(message = "Cat must have a sex.")
-        private String sex;
-
-        @Max(value = 38, message = "Cat must be between 0 and 38 years old.")
-        private int age;
-
-        private boolean declawed;
-
-        private boolean neutered;
-
-        private boolean deceased;
-
-        private boolean purebread;
-
-        private boolean goodWithOtherPets;
-
-        private boolean goodWithKids;
-
+    public static final void diffIfNotEqual(StringBuilder sb,
+                                            Cat actual,
+                                            Cat expected) {
+        if(Objects.equals(actual, expected)) {
+           return;
+        }
+        if(Objects.isNull(actual) || Objects.isNull(actual.getMicrochip()) ||
+                Objects.isNull(expected) || Objects.isNull(expected.getMicrochip())) {
+            diffFormat(sb, "Cat Object", String.valueOf(actual), String.valueOf(expected));
+        }
+        diffFormat(sb, "microchipNumber",String.valueOf(actual.getMicrochip().getMicrochipNumber()),
+                        String.valueOf(expected.getMicrochip().getMicrochipNumber()));
+        diffFormat(sb, "name", actual.getName(), expected.getName());
+        diffFormat(sb, "breed", actual.getBreed() ,expected.getBreed());
+        diffFormat(sb, "type", actual.getType(), expected.getType());
+        diffFormat(sb, "primaryColor", actual.getPrimaryColor(), expected.getPrimaryColor());
+        diffFormat(sb, "sex", actual.getSex(), expected.getSex());
+        diffFormat(sb, "age", String.valueOf(actual.getAge()), String.valueOf(expected.getAge()));
+        diffFormat(sb, "declawed", String.valueOf(actual.isDeclawed()), String.valueOf(expected.isDeclawed()));
+        diffFormat(sb, "neutered", String.valueOf(actual.getMicrochip()), String.valueOf(expected.getMicrochip()));
+        diffFormat(sb, "deceased", String.valueOf(actual.isDeceased()), String.valueOf(expected.isDeceased()));
+        diffFormat(sb, "purebread", String.valueOf(actual.isPurebread()), String.valueOf(expected.isPurebread()));
+        diffFormat(sb, "goodWithOtherPets", String.valueOf(actual.isGoodWithOtherPets()), String.valueOf(expected.isGoodWithOtherPets()));
+        diffFormat(sb, "goodWithKids", String.valueOf(actual.isGoodWithKids()), String.valueOf(expected.isGoodWithKids()));
     }
 
-    public static final String formatCompare(StringBuilder sb,
+    public static final void diffFormat(StringBuilder sb,
                                         String parameter,
                                         String actual,
                                         String expected) {
-        return String.format("[%s] --> [%s] != [%s]\n", parameter, actual, expected);
+        sb.append(String.format("[%s] --> [%s] != [%s]\n", parameter, actual, expected));
+    }
+
+    public static final void diffFormatIfNotEqual(StringBuilder sb,
+                                                  String parameter,
+                                                  String actual,
+                                                  String expected) {
+        if(!Objects.equals(actual, expected)) {
+            diffFormat(sb, parameter, actual, expected);
+        }
     }
 }

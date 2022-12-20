@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Microchip {
     /** Worldwide 9 to 15 digit number unique identifier for a chip that goes into the back of a pet's neck. */
