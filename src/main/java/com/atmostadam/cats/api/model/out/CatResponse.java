@@ -3,12 +3,15 @@ package com.atmostadam.cats.api.model.out;
 import com.atmostadam.cats.api.model.Cat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -32,6 +35,11 @@ public class CatResponse {
         this.stackTrace = stackTrace;
         return this;
     }
+
+    public CatResponse stackTrace(Exception e) {
+        return stackTrace(ExceptionUtils.getStackTrace(e));
+    }
+
     public CatResponse addCats(List<Cat> cats) {
         this.cats.addAll(cats);
         return this;
@@ -44,5 +52,9 @@ public class CatResponse {
 
     public ResponseEntity<CatResponse> newResponseEntity(HttpStatus status) {
         return new ResponseEntity<>(this, status);
+    }
+
+    public ResponseEntity<CatResponse> newResponseEntity(MultiValueMap<String, String> headers, HttpStatus status) {
+        return new ResponseEntity<>(this, headers, status);
     }
 }
