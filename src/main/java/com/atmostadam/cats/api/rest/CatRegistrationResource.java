@@ -16,17 +16,25 @@ import javax.validation.Valid;
 public interface CatRegistrationResource {
     @GetMapping
     @ApiOperation("This API queries for a cat by microchip number internally within our system.")
-    ResponseEntity<CatResponse> queryByMicrochipNumber(@Valid @RequestBody CatMicrochipRequest cat);
+    ResponseEntity<CatResponse> queryByMicrochipNumber(
+            @RequestHeader(value = "requestId") String requestId,
+            @Valid @RequestBody CatMicrochipRequest cat);
 
     @PostMapping
     @ApiOperation("This API adds a cat or list of cats internally within our system.")
-    ResponseEntity<CatResponse> addCat(@Valid @RequestBody CatRequest cat);
+    ResponseEntity<CatResponse> addCat(
+            @RequestHeader(value = "requestId") String requestId,
+            @Valid @RequestBody CatRequest cat);
 
     @PatchMapping
     @ApiOperation("This API updates a cat or list of cats internally within our system.")
-    ResponseEntity<CatResponse> updateCat(@Valid @RequestBody CatRequest cat);
+    ResponseEntity<CatResponse> updateCat(
+            @RequestHeader(value = "requestId") String requestId,
+            @Valid @RequestBody CatRequest cat);
 
     @DeleteMapping
     @ApiOperation("This API deletes a cat by microchip number internally within our system.")
-    ResponseEntity<CatResponse> deleteCat(@Valid @RequestBody CatMicrochipRequest cat);
+    ResponseEntity<CatResponse> deleteCat(
+            @RequestHeader(value = "requestId") String requestId,
+            @Valid @RequestBody CatMicrochipRequest cat);
 }

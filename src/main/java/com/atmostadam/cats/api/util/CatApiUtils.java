@@ -81,59 +81,25 @@ public class CatApiUtils {
 
     public static final CatResponse switchException(@NonNull CatRequest request,
                                                     @NonNull Exception exception) {
-        CatResponse response = new CatResponse();
-        response.setTransactionId(request.getTransactionId());
-        response.getCats().addAll(request.getCats());
-        StringBuilder microchips = new StringBuilder();
-        request.getCats().forEach(e -> microchips.append(microchips).append(","));
-        response.setMessage(String.format("Transaction ID [%s] microchip numbers [%s] exception message [%s]",
-                request.getTransactionId(), StringUtils.removeEnd(microchips.toString(), ","),
-                exception.getMessage()));
-        response.setStackTrace(ExceptionUtils.getStackTrace(exception));
-        return response;
+        return new CatResponse()
+                .message(String.format("Microchip numbers [%s] have associated exception message [%s]",
+                        concatMicrochips(request.getCats()), exception.getMessage()))
+                .stackTrace(ExceptionUtils.getStackTrace(exception))
+                .addCats(request.getCats());
     }
 
     public static final CatResponse switchException(@NonNull CatMicrochipRequest microchipRequest,
                                                     @NonNull Exception exception) {
-        CatResponse response = new CatResponse();
-        response.setTransactionId(microchipRequest.getTransactionId());
-        response.setMessage(exception.getMessage());
-        response.setMessage(String.format("Transaction ID [%s] microchip number [%s] exception message [%s]",
-                microchipRequest.getTransactionId(), microchipRequest.getMicrochip().getMicrochipNumber(),
-                exception.getMessage()));
-        response.setStackTrace(ExceptionUtils.getStackTrace(exception));
-        return response;
-    }
-
-    public static final ResponseEntity<CatResponse> successResponse(@NonNull String transactionId,
-                                                                    String message,
-                                                                    List<Cat> cats) {
-        CatResponse response = CatResponse.builder()
-                .transactionId(transactionId)
-                .message(message)
-                .build();
-        response.getCats().addAll(cats);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    public static final ResponseEntity<CatResponse> http500Response(@NonNull String transactionId,
-                                                                    Exception exception,
-                                                                    List<Cat> cats) {
-        CatResponse response = CatResponse.builder()
-                .transactionId(transactionId)
-                .message(exception.getMessage())
-                .stackTrace(ExceptionUtils.getStackTrace(exception))
-                .build();
-        response.getCats().addAll(cats);
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new CatResponse()
+                .message(String.format("Microchip number [%s] have associated exception message [%s]",
+                        microchipRequest.getMicrochip().getMicrochipNumber(), exception.getMessage()))
+                .stackTrace(ExceptionUtils.getStackTrace(exception));
     }
 
     public static final String concatMicrochips(@NonNull List<Cat> cats) {
-        List<Long> microchips = new ArrayList<>();
-        Objects.requireNonNull(cats).forEach(e -> microchips.add(e.getMicrochip().getMicrochipNumber()));
-        StringBuilder sb = new StringBuilder();
-        microchips.forEach(e -> sb.append(e).append(","));
-        return StringUtils.removeEnd(sb.toString(), ",");
+        StringBuilder microchips = new StringBuilder();
+        cats.forEach(e -> microchips.append(e.getMicrochip().getMicrochipNumber()).append(","));
+        return StringUtils.removeEnd(microchips.toString(), ",");
     }
 
     @SneakyThrows

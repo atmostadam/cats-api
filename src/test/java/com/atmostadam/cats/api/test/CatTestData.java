@@ -9,7 +9,10 @@ import java.util.UUID;
 public final class CatTestData {
     private CatTestData() { }
 
-    public static final Cat cat() {
+    public static String TEST_REQUEST_ID = "d1e2a63e-7c43-47ba-8721-ab872640b0b1";
+    public static Long TEST_MICROCHIP_NUMBER = 431654132132657L;
+
+    public static Cat cat() {
         Cat cat = new Cat();
         Microchip microchip = new Microchip();
         microchip.setMicrochipNumber(431654132132657L);
@@ -25,10 +28,7 @@ public final class CatTestData {
         return cat;
     }
 
-    public static final  CatRequest request() {
-        CatRequest request = new CatRequest();
-        request.setTransactionId(UUID.randomUUID().toString());
-        request.getCats().add(cat());
-        return request;
+    public static CatRequest request() {
+        return new CatRequest().addCat(cat());
     }
 }

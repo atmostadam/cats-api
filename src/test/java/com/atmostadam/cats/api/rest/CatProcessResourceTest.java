@@ -14,15 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.List;
-
-import static com.atmostadam.cats.api.test.CatTestData.cat;
-import static com.atmostadam.cats.api.test.CatTestData.request;
+import static com.atmostadam.cats.api.test.CatTestData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -42,81 +39,85 @@ public class CatProcessResourceTest {
 
     @Test
     void treatCat() throws Exception {
-        CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.getCats().add(cat());
+        CatResponse expected = new CatResponse().message("Cat has been Treated.").addCat(cat());
 
-        when(restResource.treatCat(isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
+        when(restResource.treatCat(isA(String.class), isA(CatRequest.class)))
+                .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
 
         MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/medical")
+                        .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertThat(mvcResult.getResponse().getStatus(), equalTo(200));
-        assertThat(om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class).getMessage(),
-                Matchers.equalTo(expectedResponse.getMessage()));
+        CatResponse actual = om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class);
+        assertThat(actual.getMessage(), Matchers.equalTo(expected.getMessage()));
+        assertThat(actual.getStackTrace(), Matchers.equalTo(expected.getStackTrace()));
+        assertThat(actual.getCats(), Matchers.equalTo(actual.getCats()));
     }
 
     @Test
     void microchipCat() throws Exception {
-        CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.getCats().add(cat());
+        CatResponse expected = new CatResponse().message("Cat has been microchipped.").addCat(cat());
 
-        when(restResource.microchipCat(isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
+        when(restResource.microchipCat(isA(String.class), isA(CatRequest.class)))
+                .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
 
         MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/microchip")
+                        .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertThat(mvcResult.getResponse().getStatus(), equalTo(200));
-        assertThat(om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class).getMessage(),
-                Matchers.equalTo(expectedResponse.getMessage()));
+        CatResponse actual = om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class);
+        assertThat(actual.getMessage(), Matchers.equalTo(expected.getMessage()));
+        assertThat(actual.getStackTrace(), Matchers.equalTo(expected.getStackTrace()));
+        assertThat(actual.getCats(), Matchers.equalTo(actual.getCats()));
     }
 
     @Test
     void postPetfinderCat() throws Exception {
-        CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.getCats().add(cat());
+        CatResponse expected = new CatResponse().message("Cat has been posted to Petfinder.").addCat(cat());
 
-        when(restResource.postPetfinderCat(isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
+        when(restResource.postPetfinderCat(isA(String.class), isA(CatRequest.class)))
+                .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
 
         MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/petfinder")
+                        .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertThat(mvcResult.getResponse().getStatus(), equalTo(200));
-        assertThat(om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class).getMessage(),
-                Matchers.equalTo(expectedResponse.getMessage()));
+        CatResponse actual = om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class);
+        assertThat(actual.getMessage(), Matchers.equalTo(expected.getMessage()));
+        assertThat(actual.getStackTrace(), Matchers.equalTo(expected.getStackTrace()));
+        assertThat(actual.getCats(), Matchers.equalTo(actual.getCats()));
     }
 
     @Test
     void postAdoptAPetCat() throws Exception {
-        CatResponse expectedResponse = new CatResponse();
-        expectedResponse.setMessage("Cat Has Been Added to Database.");
-        expectedResponse.getCats().add(cat());
+        CatResponse expected = new CatResponse().message("Cat has been posted to Adopt-a-Pet.").addCat(cat());
 
-        when(restResource.postAdoptAPetCat(isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(expectedResponse, HttpStatus.OK));
+        when(restResource.postAdoptAPetCat(isA(String.class), isA(CatRequest.class)))
+                .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
 
         MvcResult mvcResult = mockMvc.perform(post("/cats/process/1.0/cat/adoptapet")
+                        .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(request())))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertThat(mvcResult.getResponse().getStatus(), equalTo(200));
-        assertThat(om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class).getMessage(),
-                Matchers.equalTo(expectedResponse.getMessage()));
+        CatResponse actual = om.readValue(mvcResult.getResponse().getContentAsString(), CatResponse.class);
+        assertThat(actual.getMessage(), Matchers.equalTo(expected.getMessage()));
+        assertThat(actual.getStackTrace(), Matchers.equalTo(expected.getStackTrace()));
+        assertThat(actual.getCats(), Matchers.equalTo(actual.getCats()));
     }
 }

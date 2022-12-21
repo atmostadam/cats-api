@@ -1,5 +1,6 @@
 package com.atmostadam.cats.api.model;
 
+import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -18,4 +19,9 @@ public class Microchip {
     @Min(value = 100000000L, message = "Microchip Number must 9 digits or greater based on manufacturer standards.")
     @Max(value = 999999999999999L, message = "Microchip Number must 15 digits or less based on manufacturer standards.")
     private Long microchipNumber;
+
+    public Microchip microchipNumber(Long microchipNumber) {
+        this.microchipNumber = microchipNumber;
+        return this;
+    }
 }
