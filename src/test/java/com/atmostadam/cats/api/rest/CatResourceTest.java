@@ -40,7 +40,7 @@ class CatResourceTest {
 
     @Test
     void onboardCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat Has Been Onboarded.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Onboarded.").addCat(cat());
 
         when(restResource.onboardCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -61,7 +61,7 @@ class CatResourceTest {
 
     @Test
     void transferCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat Has Been Transferred.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Transferred.").addCat(cat());
 
         when(restResource.transferCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -82,7 +82,7 @@ class CatResourceTest {
 
     @Test
     void fosterCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat is now in Foster Care.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat is now in Foster Care.").addCat(cat());
 
         when(restResource.fosterCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -103,7 +103,7 @@ class CatResourceTest {
 
     @Test
     void adoptCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat Has Been Adopted.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Adopted.").addCat(cat());
 
         when(restResource.adoptCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));

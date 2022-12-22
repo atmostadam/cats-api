@@ -3,16 +3,14 @@ package com.atmostadam.cats.api.model;
 import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Microchip {
     /** Worldwide 9 to 15 digit number unique identifier for a chip that goes into the back of a pet's neck. */

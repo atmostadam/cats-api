@@ -2,6 +2,7 @@ package com.atmostadam.cats.api.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Accessors(fluent = false, chain = true)
 public class Cage {
     private String id;
     private int height;

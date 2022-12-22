@@ -39,7 +39,7 @@ public class CatProcessResourceTest {
 
     @Test
     void treatCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat has been Treated.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat has been Treated.").addCat(cat());
 
         when(restResource.treatCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -60,7 +60,7 @@ public class CatProcessResourceTest {
 
     @Test
     void microchipCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat has been microchipped.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat has been microchipped.").addCat(cat());
 
         when(restResource.microchipCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -81,7 +81,7 @@ public class CatProcessResourceTest {
 
     @Test
     void postPetfinderCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat has been posted to Petfinder.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat has been posted to Petfinder.").addCat(cat());
 
         when(restResource.postPetfinderCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -102,7 +102,7 @@ public class CatProcessResourceTest {
 
     @Test
     void postAdoptAPetCat() throws Exception {
-        CatResponse expected = new CatResponse().message("Cat has been posted to Adopt-a-Pet.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat has been posted to Adopt-a-Pet.").addCat(cat());
 
         when(restResource.postAdoptAPetCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));

@@ -3,6 +3,7 @@ package com.atmostadam.cats.api.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -16,10 +17,7 @@ import javax.validation.constraints.Pattern;
  */
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cat {
     @Valid

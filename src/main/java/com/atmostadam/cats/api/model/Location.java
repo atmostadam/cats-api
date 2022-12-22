@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * A JSON object that represents the location where the cat will be spayed or neutered and treated for
@@ -14,9 +15,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-//@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Location {
 

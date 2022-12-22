@@ -3,12 +3,11 @@ package com.atmostadam.cats.api.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person {
     private PersonType personType;

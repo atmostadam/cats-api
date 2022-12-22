@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * A JSON object that represents the government agency that will be taking care of the cat.
@@ -13,9 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-//@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Government {
 

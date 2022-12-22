@@ -60,17 +60,16 @@ public class CatApiUtils {
     }
 
     public static final Cat switchCat(@NonNull CatEntity catEntity) {
-        return Cat.builder()
-                .microchip(Microchip.builder().microchipNumber(catEntity.getMicrochipNumber()).build())
-                .name(catEntity.getName())
-                .breed(catEntity.getBreed())
-                .type(catEntity.getType())
-                .primaryColor(catEntity.getPrimaryColor())
-                .sex(catEntity.getSex())
-                .age(catEntity.getAge())
-                .neutered(catEntity.getNeutered())
-                .deceased(catEntity.getDeceased())
-                .build();
+        return new Cat()
+                .setMicrochip(new Microchip().setMicrochipNumber(catEntity.getMicrochipNumber()))
+                .setName(catEntity.getName())
+                .setBreed(catEntity.getBreed())
+                .setType(catEntity.getType())
+                .setPrimaryColor(catEntity.getPrimaryColor())
+                .setSex(catEntity.getSex())
+                .setAge(catEntity.getAge())
+                .setNeutered(catEntity.getNeutered())
+                .setDeceased(catEntity.getDeceased());
     }
 
     public static final List<Cat> switchCats(@NonNull List<CatEntity> catEntities) {
@@ -82,18 +81,18 @@ public class CatApiUtils {
     public static final CatResponse switchException(@NonNull CatRequest request,
                                                     @NonNull Exception exception) {
         return new CatResponse()
-                .message(String.format("Microchip numbers [%s] have associated exception message [%s]",
+                .setMessage(String.format("Microchip numbers [%s] have associated exception message [%s]",
                         concatMicrochips(request.getCats()), exception.getMessage()))
-                .stackTrace(ExceptionUtils.getStackTrace(exception))
+                .setStackTrace(ExceptionUtils.getStackTrace(exception))
                 .addCats(request.getCats());
     }
 
     public static final CatResponse switchException(@NonNull CatMicrochipRequest microchipRequest,
                                                     @NonNull Exception exception) {
         return new CatResponse()
-                .message(String.format("Microchip number [%s] have associated exception message [%s]",
+                .setMessage(String.format("Microchip number [%s] have associated exception message [%s]",
                         microchipRequest.getMicrochip().getMicrochipNumber(), exception.getMessage()))
-                .stackTrace(ExceptionUtils.getStackTrace(exception));
+                .setStackTrace(ExceptionUtils.getStackTrace(exception));
     }
 
     public static final String concatMicrochips(@NonNull List<Cat> cats) {

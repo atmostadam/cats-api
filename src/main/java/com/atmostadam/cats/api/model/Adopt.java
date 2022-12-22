@@ -2,6 +2,7 @@ package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * A JSON object that represents the person or organization where the cat has been adopted out.
@@ -10,9 +11,7 @@ import lombok.*;
  */
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Adopt {
     private Person adoptTo;

@@ -2,6 +2,7 @@ package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -12,9 +13,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Delivery {
     private List<Cat> cats;
