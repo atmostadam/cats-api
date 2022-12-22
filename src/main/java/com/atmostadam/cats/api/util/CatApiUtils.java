@@ -39,24 +39,23 @@ public class CatApiUtils {
 
     public static final String defaultPrint(@NonNull Object o) throws CatException {
         try {
-        return om.writeValueAsString(o);
+            return om.writeValueAsString(o);
         } catch (Exception e) {
             throw new CatException(e);
         }
     }
 
     public static final CatEntity switchCat(@NonNull Cat cat) {
-        return CatEntity.builder()
-                .microchipNumber(cat.getMicrochip().getMicrochipNumber())
-                .name(cat.getName())
-                .breed(cat.getBreed())
-                .type(cat.getType())
-                .primaryColor(cat.getPrimaryColor())
-                .sex(cat.getSex())
-                .age(cat.getAge())
-                .neutered(cat.isNeutered())
-                .deceased(cat.isDeceased())
-                .build();
+        return new CatEntity()
+                .setMicrochipNumber(cat.getMicrochip().getMicrochipNumber())
+                .setName(cat.getName())
+                .setBreed(cat.getBreed())
+                .setType(cat.getType())
+                .setPrimaryColor(cat.getPrimaryColor())
+                .setSex(cat.getSex())
+                .setAge(cat.getAge())
+                .setNeutered(cat.isNeutered())
+                .setDeceased(cat.isDeceased());
     }
 
     public static final Cat switchCat(@NonNull CatEntity catEntity) {
@@ -123,47 +122,5 @@ public class CatApiUtils {
     @SneakyThrows
     public static final String logResponseMessage(@NonNull ResponseEntity<CatResponse> response) {
         return String.format("RESPONSE: [%s]", prettyPrint(response));
-    }
-
-    public static final void diffIfNotEqual(StringBuilder sb,
-                                            Cat actual,
-                                            Cat expected) {
-        if(Objects.equals(actual, expected)) {
-           return;
-        }
-        if(Objects.isNull(actual) || Objects.isNull(actual.getMicrochip()) ||
-                Objects.isNull(expected) || Objects.isNull(expected.getMicrochip())) {
-            diffFormat(sb, "Cat Object", String.valueOf(actual), String.valueOf(expected));
-        }
-        diffFormat(sb, "microchipNumber",String.valueOf(actual.getMicrochip().getMicrochipNumber()),
-                        String.valueOf(expected.getMicrochip().getMicrochipNumber()));
-        diffFormat(sb, "name", actual.getName(), expected.getName());
-        diffFormat(sb, "breed", actual.getBreed() ,expected.getBreed());
-        diffFormat(sb, "type", actual.getType(), expected.getType());
-        diffFormat(sb, "primaryColor", actual.getPrimaryColor(), expected.getPrimaryColor());
-        diffFormat(sb, "sex", actual.getSex(), expected.getSex());
-        diffFormat(sb, "age", String.valueOf(actual.getAge()), String.valueOf(expected.getAge()));
-        diffFormat(sb, "declawed", String.valueOf(actual.isDeclawed()), String.valueOf(expected.isDeclawed()));
-        diffFormat(sb, "neutered", String.valueOf(actual.getMicrochip()), String.valueOf(expected.getMicrochip()));
-        diffFormat(sb, "deceased", String.valueOf(actual.isDeceased()), String.valueOf(expected.isDeceased()));
-        diffFormat(sb, "purebread", String.valueOf(actual.isPurebread()), String.valueOf(expected.isPurebread()));
-        diffFormat(sb, "goodWithOtherPets", String.valueOf(actual.isGoodWithOtherPets()), String.valueOf(expected.isGoodWithOtherPets()));
-        diffFormat(sb, "goodWithKids", String.valueOf(actual.isGoodWithKids()), String.valueOf(expected.isGoodWithKids()));
-    }
-
-    public static final void diffFormat(StringBuilder sb,
-                                        String parameter,
-                                        String actual,
-                                        String expected) {
-        sb.append(String.format("[%s] --> [%s] != [%s]\n", parameter, actual, expected));
-    }
-
-    public static final void diffFormatIfNotEqual(StringBuilder sb,
-                                                  String parameter,
-                                                  String actual,
-                                                  String expected) {
-        if(!Objects.equals(actual, expected)) {
-            diffFormat(sb, parameter, actual, expected);
-        }
     }
 }

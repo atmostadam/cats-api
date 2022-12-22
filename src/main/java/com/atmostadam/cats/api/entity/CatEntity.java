@@ -1,6 +1,7 @@
 package com.atmostadam.cats.api.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.Column;
@@ -15,9 +16,7 @@ import java.sql.Timestamp;
 @NamedQuery(name = "CatTable.queryByMicrochipNumber", query = "FROM CatEntity WHERE microchipNumber = :microchipNumber")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(fluent = false, chain = true)
 public class CatEntity {
     @Id
     @Column(name = "microchip_number")
