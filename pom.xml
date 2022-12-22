@@ -102,10 +102,12 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			-->
 			<plugin>
 				<groupId>io.swagger.core.v3</groupId>
 				<artifactId>swagger-maven-plugin</artifactId>
@@ -159,11 +161,11 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+		-->
 
 	<scm>
 		<connection>scm:git:https://github.com:atmostadam/cats-api.git</connection>
 		<developerConnection>scm:git:git@github.com:atmostadam/cats-api.git</developerConnection>
 		<url>https://github.com/atmostadam/cats-api</url>
 	</scm>
-	-->
 </project>
