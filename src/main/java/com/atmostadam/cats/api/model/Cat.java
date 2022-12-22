@@ -59,4 +59,8 @@ public class Cat {
         MEDIUM,
         LONG;
     }
+
+    public Cat setMicrochipNumber(Long microchipNumber) {
+        return setMicrochip(new Microchip().setMicrochipNumber(microchipNumber));
+    }
 }
