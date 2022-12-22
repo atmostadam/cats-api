@@ -124,6 +124,7 @@
 		</plugins>
 	</build>
 
+	<!--
 	<repositories>
 		<repository>
 			<id>central</id>
@@ -161,4 +162,5 @@
 		<developerConnection>scm:git:git@github.com:atmostadam/cats-api.git</developerConnection>
 		<url>https://github.com/atmostadam/cats-api</url>
 	</scm>
+	-->
 </project>
