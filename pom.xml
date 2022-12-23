@@ -22,7 +22,7 @@
 		<java.version>17</java.version>
 		<faker.version>1.0.2</faker.version>
 		<springfox.version>3.0.0</springfox.version>
-		<cats.version>0.0.5</cats.version>
+		<cats.version>0.0.6</cats.version>
 	</properties>
 
 	<developers>
