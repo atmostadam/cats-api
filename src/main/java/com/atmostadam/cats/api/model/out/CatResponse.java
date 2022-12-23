@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import javax.validation.constraints.NotBlank;
@@ -34,8 +35,10 @@ public class CatResponse {
         return this;
     }
 
-    public ResponseEntity<CatResponse> newResponseEntity(HttpStatus status) {
-        return new ResponseEntity<>(this, status);
+    public ResponseEntity<CatResponse> newResponseEntity(String requestId, HttpStatus status) {
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.put("requestId", List.of(requestId));
+        return newResponseEntity(headers, status);
     }
 
     public ResponseEntity<CatResponse> newResponseEntity(MultiValueMap<String, String> headers, HttpStatus status) {
