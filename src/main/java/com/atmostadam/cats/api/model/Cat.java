@@ -1,8 +1,11 @@
 package com.atmostadam.cats.api.model;
 
+import com.atmostadam.cats.api.entity.CatEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.Valid;

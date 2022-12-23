@@ -1,5 +1,7 @@
 package com.atmostadam.cats.api.rest;
 
+import com.atmostadam.cats.api.model.CatRequestTest;
+import com.atmostadam.cats.api.model.CatTest;
 import com.atmostadam.cats.api.model.Microchip;
 import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.atmostadam.cats.api.model.in.CatRequest;
@@ -19,7 +21,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.List;
 import java.util.UUID;
 
-import static com.atmostadam.cats.api.test.CatTestData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.isA;
@@ -31,6 +32,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @MockitoSettings
 public class CatRegistrationResourceTest {
+    public static String TEST_REQUEST_ID = "d1e2a63e-7c43-47ba-8721-ab872640b0b1";
+    public static Long TEST_MICROCHIP_NUMBER = 431654132132657L;
     public static final ObjectMapper om = new ObjectMapper();
 
     @Mock
@@ -45,7 +48,7 @@ public class CatRegistrationResourceTest {
 
     @Test
     void queryByMicrochipNumber() throws Exception {
-        CatResponse expected = new CatResponse().setMessage("Cat Found by Microchip Number.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Found by Microchip Number.").addCat(CatTest.testData());
 
         when(restResource.queryByMicrochipNumber(isA(String.class), isA(CatMicrochipRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -66,7 +69,7 @@ public class CatRegistrationResourceTest {
 
     @Test
     void addCat() throws Exception {
-        CatResponse expected = new CatResponse().setMessage("Cat Has Been Added to Database.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Added to Database.").addCat(CatTest.testData());
 
         when(restResource.addCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -74,7 +77,7 @@ public class CatRegistrationResourceTest {
         MvcResult mvcResult = mockMvc.perform(post("/cats/register/1.0/cat")
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request())))
+                        .content(om.writeValueAsString(CatRequestTest.testData())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -87,7 +90,7 @@ public class CatRegistrationResourceTest {
 
     @Test
     void updateCat() throws Exception {
-        CatResponse expected = new CatResponse().setMessage("Cat Has Been Updated in the Database.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Updated in the Database.").addCat(CatTest.testData());
 
         when(restResource.updateCat(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
@@ -95,7 +98,7 @@ public class CatRegistrationResourceTest {
         MvcResult mvcResult = mockMvc.perform(patch("/cats/register/1.0/cat")
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(request())))
+                        .content(om.writeValueAsString(CatRequestTest.testData())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -108,7 +111,7 @@ public class CatRegistrationResourceTest {
 
     @Test
     void deleteCat() throws Exception {
-        CatResponse expected = new CatResponse().setMessage("Cat Has Been Deleted From the Database.").addCat(cat());
+        CatResponse expected = new CatResponse().setMessage("Cat Has Been Deleted From the Database.").addCat(CatTest.testData());
 
         when(restResource.deleteCat(isA(String.class), isA(CatMicrochipRequest.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));

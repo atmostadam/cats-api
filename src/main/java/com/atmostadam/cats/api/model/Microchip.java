@@ -1,8 +1,8 @@
 package com.atmostadam.cats.api.model;
 
-import com.atmostadam.cats.api.model.in.CatMicrochipRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;

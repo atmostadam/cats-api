@@ -1,6 +1,9 @@
 package com.atmostadam.cats.api.entity;
 
-import lombok.*;
+import com.atmostadam.cats.api.model.Cat;
+import com.atmostadam.cats.api.model.Microchip;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.NamedQuery;
 
@@ -44,4 +47,17 @@ public class CatEntity {
 
     @Column(name = "updated_timestamp")
     private Timestamp updatedTimestamp;
+
+    public Cat newCat() {
+        return new Cat()
+                .setMicrochip(new Microchip().setMicrochipNumber(microchipNumber))
+                .setName(name)
+                .setBreed(breed)
+                .setType(type)
+                .setPrimaryColor(primaryColor)
+                .setSex(sex)
+                .setAge(age)
+                .setNeutered(neutered)
+                .setDeceased(deceased);
+    }
 }
