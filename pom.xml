@@ -6,7 +6,7 @@
 
 	<groupId>com.atmostadam.cats</groupId>
 	<artifactId>cats-api</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 
 	<name>Cats API</name>
 	<description>Cats API for Cat Charity Organization</description>
@@ -95,80 +95,4 @@
 			<url>https://maven.pkg.github.com/atmostadam/cats-api</url>
 		</repository>
 	</distributionManagement>
-
-	<!--
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-        </plugin>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-        </plugin>
-        <plugin>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-maven-plugin</artifactId>
-            <version>2.0.9</version>
-            <configuration>
-                <outputFileName>openapi</outputFileName>
-                <outputPath>${project.build.directory}/generatedtest</outputPath>
-
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>resolve</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
-
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Repository</name>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>central</id>
-			<name>Central Repository</name>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
-	<distributionManagement>
-		<repository>
-			<id>ossrh</id>
-			<name>Central Repository OSSRH</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
-	<scm>
-		<connection>scm:git:https://github.com:atmostadam/cats-api.git</connection>
-		<developerConnection>scm:git:git@github.com:atmostadam/cats-api.git</developerConnection>
-		<url>https://github.com/atmostadam/cats-api</url>
-	</scm>
-	-->
 </project>
