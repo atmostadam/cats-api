@@ -5,6 +5,9 @@ import lombok.NonNull;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CatEntityTest {
@@ -18,7 +21,9 @@ public class CatEntityTest {
                 .setSex("F")
                 .setAge(2)
                 .setDeceased(false)
-                .setNeutered(true);
+                .setNeutered(true)
+                .setCreatedTimestamp(Timestamp.from(Instant.now()))
+                .setUpdatedTimestamp(Timestamp.from(Instant.now()));
     }
 
     @Test

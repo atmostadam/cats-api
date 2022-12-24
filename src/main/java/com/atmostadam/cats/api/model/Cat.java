@@ -8,10 +8,13 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 /**
  * A JSON object that represents the actual cat itself.
@@ -65,5 +68,20 @@ public class Cat {
 
     public Cat setMicrochipNumber(Long microchipNumber) {
         return setMicrochip(new Microchip().setMicrochipNumber(microchipNumber));
+    }
+
+    public CatEntity newCatEntity() {
+        return new CatEntity()
+                .setMicrochipNumber(microchip.getMicrochipNumber())
+                .setName(name)
+                .setBreed(breed)
+                .setType(type)
+                .setPrimaryColor(primaryColor)
+                .setSex(sex)
+                .setAge(age)
+                .setNeutered(neutered)
+                .setDeceased(deceased)
+                .setCreatedTimestamp(Timestamp.from(Instant.now()))
+                .setUpdatedTimestamp(Timestamp.from(Instant.now()));
     }
 }
