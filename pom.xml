@@ -6,7 +6,7 @@
 
 	<groupId>com.atmostadam.cats</groupId>
 	<artifactId>cats-api</artifactId>
-	<version>${cats.version}</version>
+	<version>0.0.9</version>
 	<name>cats-api</name>
 	<description>Cats API for Therapy Cat Charity Organization</description>
 	<url>atmostadam.com</url>
@@ -21,7 +21,6 @@
 		<java.version>17</java.version>
 		<faker.version>1.0.2</faker.version>
 		<springfox.version>3.0.0</springfox.version>
-		<cats.version>0.0.8</cats.version>
 	</properties>
 
 	<developers>
