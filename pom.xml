@@ -7,9 +7,8 @@
 	<groupId>com.atmostadam.cats</groupId>
 	<artifactId>cats-api</artifactId>
 	<version>${cats.version}</version>
-
-	<name>Cats API</name>
-	<description>Cats API for Cat Charity Organization</description>
+	<name>cats-api</name>
+	<description>Cats API for Therapy Cat Charity Organization</description>
 	<url>atmostadam.com</url>
 
     <parent>
