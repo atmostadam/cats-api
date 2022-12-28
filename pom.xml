@@ -17,9 +17,8 @@
     </parent>
 
 	<properties>
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<!-- 17 not yet fully supported by Github Maven Packages -->
+		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<revision>0.0.10</revision>
 		<faker.version>1.0.2</faker.version>
