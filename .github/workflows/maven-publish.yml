@@ -27,6 +27,7 @@ jobs:
 
       - name: Create settings.xml
         uses: s4u/maven-settings-action@v2.8.0
+        path: $GITHUB_WORKSPACE/settings.xml
         with:
           servers: '[{"id": "github", "username": "${{secrets.CATS_USERNAME}}", "password": "${{secrets.CATS_PASSWORD}}"}]'
 
