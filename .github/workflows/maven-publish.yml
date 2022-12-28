@@ -28,8 +28,8 @@ jobs:
       - name: Create settings.xml
         uses: s4u/maven-settings-action@v2.8.0
         with:
-          path: $GITHUB_WORKSPACE/settings.xml
-          servers: '[{"id": "cats-api", "username": "${{secrets.CATS_USERNAME}}", "password": "${{secrets.CATS_PASSWORD}}"}]'
+          path: ${{ github.workspace }}
+          servers: '[{"id": "cats-api", "username": "${{ secrets.CATS_USERNAME }}", "password": "${{ secrets.CATS_PASSWORD }}"}]'
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
