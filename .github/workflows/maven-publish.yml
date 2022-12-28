@@ -10,6 +10,9 @@ on:
 jobs:
   build:
 
+    environment:
+      name: Development
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,7 +27,10 @@ jobs:
           java-version: '17' # 11
           distribution: 'temurin' # adopt
 
+      - name: Create settings.xml
+        uses: s4u/maven-settings-action@v2.8.0
+        with:
+          servers: '[{"id": "cats-api", "username": "${{ secrets.CATS_USERNAME }}", "password": "${{ secrets.CATS_PASSWORD }}"}]'
+
       - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.CATS_PASSWORD }}
