@@ -17,10 +17,9 @@
     </parent>
 
 	<properties>
-		<!-- 17 not yet fully supported by Github Maven Packages -->
 		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<revision>0.0.11</revision>
+		<revision>0.0.12</revision>
 		<faker.version>1.0.2</faker.version>
 		<springfox.version>3.0.0</springfox.version>
 		<jacoco.version>0.8.8</jacoco.version>
