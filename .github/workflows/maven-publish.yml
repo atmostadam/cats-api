@@ -17,31 +17,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+
+      - name: Set up Java for publishing to GitHub Packages
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          server-id: cats-api # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
+          java-version: '17' # 11
+          distribution: 'temurin' # adopt
 
-      - name: Create settings.xml
-        uses: s4u/maven-settings-action@v2.8.0
-        with:
-          path: ${{ github.workspace }}/settings.xml
-          servers: |
-            [
-              {
-                "id": "cats-api",
-                "username": "${{ secrets.CATS_USERNAME }}",
-                "password": "${{ secrets.CATS_PASSWORD }}"
-              }
-            ]
-
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      - name: Publish to GitHub Packages
+        run: mvn --batch-mode deploy
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.CATS_PASSWORD }}
