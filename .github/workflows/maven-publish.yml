@@ -10,8 +10,8 @@ on:
 jobs:
   build:
 
-    environment:
-      name: Development
+    #environment:
+    #  name: Development
 
     runs-on: ubuntu-latest
     permissions:
@@ -33,7 +33,7 @@ jobs:
           servers: |
             [
               {
-                "id": "cats-api",
+                "id": "github",
                 "username": "${{ secrets.CATS_USERNAME }}",
                 "password": "${{ secrets.CATS_PASSWORD }}"
               }

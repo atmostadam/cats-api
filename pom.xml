@@ -17,11 +17,11 @@
     </parent>
 
 	<properties>
-		<revision>0.0.27</revision>
+		<revision>0.0.28</revision>
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<faker.version>1.0.2</faker.version>
 		<springfox.version>3.0.0</springfox.version>
+		<faker.version>1.0.2</faker.version>
 		<jacoco.version>0.8.8</jacoco.version>
 	</properties>
 
@@ -127,8 +127,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>cats-api</id>
-			<name>cats-api</name>
+			<id>github</id>
+			<name>github</name>
 			<url>https://maven.pkg.github.com/atmostadam/cats-api</url>
 		</repository>
 	</distributionManagement>
