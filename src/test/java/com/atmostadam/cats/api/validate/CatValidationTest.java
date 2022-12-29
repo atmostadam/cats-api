@@ -1,8 +1,7 @@
 package com.atmostadam.cats.api.validate;
 
 import com.atmostadam.cats.api.model.Cat;
-import com.atmostadam.cats.api.model.CatTest;
-import com.atmostadam.cats.api.model.Microchip;
+import com.atmostadam.cats.api.test.CatTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class  CatValidationTest {
     private Validator validator;
@@ -28,7 +26,7 @@ class  CatValidationTest {
     @Test
     void queryByMicrochipNumberLessThan9Digits() {
         Cat cat = CatTest.testData();
-        cat.setMicrochip(new Microchip().microchipNumber(43L));
+        cat.setMicrochipNumber(43L);
         Set<ConstraintViolation<Cat>> violations = validator.validate(cat);
         System.out.println(violations);
         assertThat(violations.size(), Matchers.equalTo(1));

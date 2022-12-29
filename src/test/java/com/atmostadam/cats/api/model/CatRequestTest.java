@@ -3,16 +3,31 @@ package com.atmostadam.cats.api.model;
 import com.atmostadam.cats.api.exception.CatException;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
+import com.atmostadam.cats.api.test.CatTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.atmostadam.cats.api.test.CatTestConstants.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CatRequestTest {
     public static CatRequest testData() {
         return new CatRequest().addCat(CatTest.testData());
+    }
+
+    @Test
+    void addMicrochipNumbers() {
+        CatRequest actual = new CatRequest().addMicrochipNumbers(List.of(TEST_MICROCHIP_NUMBER,
+                TEST_MICROCHIP_NUMBER_2, TEST_MICROCHIP_NUMBER_3));
+        assertThat(actual.getMicrochipNumbers().size(), Matchers.equalTo(3));
+    }
+
+    @Test
+    void addMicrochipNumber() {
+        CatRequest actual = new CatRequest().addMicrochipNumber(TEST_MICROCHIP_NUMBER);
+        assertThat(actual.getMicrochipNumbers().size(), Matchers.equalTo(1));
     }
 
     @Test

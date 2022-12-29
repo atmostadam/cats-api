@@ -4,12 +4,11 @@ import com.atmostadam.cats.api.entity.CatEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
@@ -25,9 +24,10 @@ import java.time.Instant;
 @Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cat {
-    @Valid
-    @NonNull
-    private Microchip microchip;
+    /** Worldwide 9 to 15 digit number unique identifier for a chip that goes into the back of a pet's neck. */
+    @Min(value = 100000000L, message = "Microchip Number must 9 digits or greater based on manufacturer standards.")
+    @Max(value = 999999999999999L, message = "Microchip Number must 15 digits or less based on manufacturer standards.")
+    private Long microchipNumber;
 
     @NotBlank(message = "Cat must have a name.")
     private String name;
@@ -65,13 +65,9 @@ public class Cat {
         LONG;
     }
 
-    public Cat setMicrochipNumber(Long microchipNumber) {
-        return setMicrochip(new Microchip().setMicrochipNumber(microchipNumber));
-    }
-
     public CatEntity newCatEntity() {
         return new CatEntity()
-                .setMicrochipNumber(microchip.getMicrochipNumber())
+                .setMicrochipNumber(microchipNumber)
                 .setName(name)
                 .setBreed(breed)
                 .setType(type)

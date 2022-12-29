@@ -9,6 +9,7 @@
 	<version>${revision}</version>
 	<name>cats-api</name>
 	<description>Cats API for Therapy Cat Charity Organization</description>
+	<url>http://atmostadam.com</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -17,8 +18,8 @@
     </parent>
 
 	<properties>
-		<revision>0.0.28</revision>
-		<java.version>11</java.version>
+		<revision>0.0.30</revision>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springfox.version>3.0.0</springfox.version>
 		<faker.version>1.0.2</faker.version>
@@ -28,7 +29,7 @@
 	<developers>
 		<developer>
 			<name>Adam Johnston</name>
-			<url>atmostadam.com</url>
+			<url>http://atmostadam.com</url>
 		</developer>
 	</developers>
 
@@ -128,8 +129,8 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<name>github</name>
-			<url>https://maven.pkg.github.com/atmostadam/cats-api</url>
+			<!-- <name>cats-api</name> -->
+			<!-- <url>https://maven.pkg.github.com/atmostadam/cats-api</url> -->
 		</repository>
 	</distributionManagement>
 </project>

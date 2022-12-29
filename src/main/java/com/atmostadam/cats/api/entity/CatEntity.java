@@ -1,7 +1,6 @@
 package com.atmostadam.cats.api.entity;
 
 import com.atmostadam.cats.api.model.Cat;
-import com.atmostadam.cats.api.model.Microchip;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -50,7 +49,7 @@ public class CatEntity {
 
     public Cat newCat() {
         return new Cat()
-                .setMicrochip(new Microchip().setMicrochipNumber(microchipNumber))
+                .setMicrochipNumber(microchipNumber)
                 .setName(name)
                 .setBreed(breed)
                 .setType(type)

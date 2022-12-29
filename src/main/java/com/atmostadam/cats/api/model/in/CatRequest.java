@@ -23,11 +23,23 @@ import static com.atmostadam.cats.api.util.CatApiUtils.concatMicrochips;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CatRequest {
     @Valid
+    private final List<Long> microchipNumbers = new ArrayList<>();
+    @Valid
     private final List<Cat> cats = new ArrayList<>();
     @Valid
     private Intake intake;
     @Valid
     private Delivery delivery;
+
+    public CatRequest addMicrochipNumbers(List<Long> microchipNumbers) {
+        this.microchipNumbers.addAll(microchipNumbers);
+        return this;
+    }
+
+    public CatRequest addMicrochipNumber(Long microchipNumber) {
+        this.microchipNumbers.add(microchipNumber);
+        return this;
+    }
 
     public CatRequest addCats(List<Cat> cats) {
         this.cats.addAll(cats);

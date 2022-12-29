@@ -1,6 +1,7 @@
-package com.atmostadam.cats.api.model;
+package com.atmostadam.cats.api.test;
 
 import com.atmostadam.cats.api.entity.CatEntity;
+import com.atmostadam.cats.api.model.Cat;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +23,14 @@ public class CatTest {
 
     @Test
     void setMicrochip() {
-        Cat actual = new Cat().setMicrochip(new Microchip().setMicrochipNumber(431654132132657L));
-        assertThat(actual.getMicrochip().getMicrochipNumber(), Matchers.equalTo(431654132132657L));
+        Cat actual = new Cat().setMicrochipNumber(431654132132657L);
+        assertThat(actual.getMicrochipNumber(), Matchers.equalTo(431654132132657L));
     }
 
     @Test
     void setMicrochipNumber() {
         Cat actual = new Cat().setMicrochipNumber(431654132132657L);
-        assertThat(actual.getMicrochip().getMicrochipNumber(), Matchers.equalTo(431654132132657L));
+        assertThat(actual.getMicrochipNumber(), Matchers.equalTo(431654132132657L));
     }
 
     @Test

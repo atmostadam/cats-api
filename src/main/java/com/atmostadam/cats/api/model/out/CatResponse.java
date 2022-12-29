@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,12 @@ public class CatResponse {
 
     public CatResponse addCat(Cat cat) {
         this.cats.add(cat);
+        return this;
+    }
+
+    public CatResponse setException(Exception e) {
+        message = e.getMessage();
+        stackTrace = ExceptionUtils.getStackTrace(e);
         return this;
     }
 

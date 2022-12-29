@@ -1,7 +1,7 @@
 package com.atmostadam.cats.api.model;
 
-import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
+import com.atmostadam.cats.api.test.CatTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -33,6 +33,15 @@ public class CatResponseTest {
     void addCat() {
         CatResponse actual = new CatResponse().addCat(CatTest.testData());
         assertThat(actual.getCats().size(), Matchers.equalTo(1));
+    }
+
+    @Test
+    void setException() {
+        Exception e = new RuntimeException("Simulated");
+        CatResponse actual = new CatResponse().addCats(List.of(CatTest.testData(),
+                CatTest.testData(), CatTest.testData()))
+                .setException(e);
+        assertThat(actual.getMessage(),Matchers.equalTo("Simulated"));
     }
 
     @Test
