@@ -1,8 +1,9 @@
 package com.atmostadam.cats.api.model.in;
 
+import com.atmostadam.cats.api.model.Adopt;
 import com.atmostadam.cats.api.model.Cat;
 import com.atmostadam.cats.api.model.Delivery;
-import com.atmostadam.cats.api.model.Intake;
+import com.atmostadam.cats.api.model.Location;
 import com.atmostadam.cats.api.model.out.CatResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -26,7 +27,9 @@ public class CatRequest {
     @Valid
     private final List<Cat> cats = new ArrayList<>();
     @Valid
-    private Intake intake;
+    private Adopt adopt;
+    @Valid
+    private Location location;
     @Valid
     private Delivery delivery;
 

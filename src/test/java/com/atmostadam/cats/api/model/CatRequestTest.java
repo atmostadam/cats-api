@@ -3,21 +3,39 @@ package com.atmostadam.cats.api.model;
 import com.atmostadam.cats.api.exception.CatException;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.atmostadam.cats.api.test.CatTestValues.*;
+import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatRequestTest {
-    public static final Long TEST_MICROCHIP_NUMBER = 431654132132657L;
-    public static final Long TEST_MICROCHIP_NUMBER_2 = 431654142132657L;
-    public static final Long TEST_MICROCHIP_NUMBER_3 = 431666132132657L;
-    public static final String TEST_REQUEST_ID = "d1e2a63e-7c43-47ba-8721-ab872640b0b1";
+    public static final CatRequest EXPECTED = testData();
+    public static final JsonNode EXPECTED_NODE = convertToJsonNode(testData());
 
     public static final CatRequest testData() {
-        return new CatRequest().addCat(CatTest.testData());
+        return new CatRequest()
+                .setDelivery(DeliveryTest.EXPECTED)
+                .setLocation(LocationTest.EXPECTED)
+                .setAdopt(AdoptTest.EXPECTED)
+                .addCat(CatTest.EXPECTED)
+                .addMicrochipNumber(TEST_MICROCHIP_NUMBER);
+    }
+
+    @Test
+    void catRequest() {
+        CatRequest actual = new CatRequest()
+                .setDelivery(DeliveryTest.EXPECTED)
+                .setLocation(LocationTest.EXPECTED)
+                .setAdopt(AdoptTest.EXPECTED)
+                .addCat(CatTest.EXPECTED)
+                .addMicrochipNumber(TEST_MICROCHIP_NUMBER);
+        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
     }
 
     @Test

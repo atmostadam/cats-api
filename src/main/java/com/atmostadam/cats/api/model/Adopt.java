@@ -15,9 +15,8 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Adopt {
-    private Person adoptTo;
-
-    private Cat adopted;
-
-    private Organization adoptFrom;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String businessName;
 }

@@ -1,39 +1,32 @@
 package com.atmostadam.cats.api.model;
 
-import org.hamcrest.Matchers;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
-
-// TODO: Needs work
+import static com.atmostadam.cats.api.test.CatTestValues.*;
+import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AdoptTest {
     public static final Adopt EXPECTED = testData();
-    public static final Cat ADOPTED = CatTest.testData();
-    public static final Person ADOPTED_TO = null;
-    public static final Organization ADOPTED_FROM = null;
+    public static final JsonNode EXPECTED_NODE = convertToJsonNode(testData());
 
     public static final Adopt testData() {
         return new Adopt()
-                .setAdopted(ADOPTED)
-                .setAdoptTo(ADOPTED_TO)
-                .setAdoptFrom(ADOPTED_FROM);
+                .setId(ADOPT_ID)
+                .setFirstName(FIRST_NAME)
+                .setLastName(LAST_NAME)
+                .setBusinessName(BUSINESS_NAME);
     }
 
-    //@Test
+    @Test
     void adopt() {
         Adopt actual = new Adopt()
-                .setAdopted(ADOPTED)
-                .setAdoptTo(ADOPTED_TO)
-                .setAdoptFrom(ADOPTED_FROM);
-        assertAdopt(actual, EXPECTED);
-    }
-
-    public static void assertAdopt(Adopt actual, Adopt expected) {
-        assertThat(actual.getAdopted(), Matchers.equalTo(expected.getAdopted()));
-        assertThat(actual.getAdoptTo(), Matchers.equalTo(expected.getAdoptTo()));
-        assertThat(actual.getAdoptFrom(), Matchers.equalTo(expected.getAdoptFrom()));
-
+                .setId(ADOPT_ID)
+                .setFirstName(FIRST_NAME)
+                .setLastName(LAST_NAME)
+                .setBusinessName(BUSINESS_NAME);
+        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
     }
 }

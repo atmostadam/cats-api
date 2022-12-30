@@ -16,6 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Location {
+    private Cage cage;
 
     public enum LocationType {
         GOVERNMENT_FACILITY,

@@ -17,7 +17,5 @@ import java.util.List;
 @Accessors(fluent = false, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Delivery {
-    private List<Cat> cats;
-
     private Location deliverTo;
 }

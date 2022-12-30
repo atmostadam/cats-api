@@ -1,10 +1,8 @@
 package com.atmostadam.cats.api.rest;
 
 import com.atmostadam.cats.api.configuration.CatConfiguration;
-import com.atmostadam.cats.api.model.Cat;
 import com.atmostadam.cats.api.model.CatRequestTest;
 import com.atmostadam.cats.api.model.CatResponseTest;
-import com.atmostadam.cats.api.model.CatTest;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
 import com.atmostadam.cats.api.service.CatService;
@@ -21,10 +19,13 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static com.atmostadam.cats.api.model.CatRequestTest.TEST_REQUEST_ID;
-import static com.atmostadam.cats.api.model.CatResponseTest.assertMvcResult;
-import static com.atmostadam.cats.api.model.CatTest.TEST_MICROCHIP_NUMBER;
+import java.util.List;
+
+import static com.atmostadam.cats.api.test.CatTestValues.TEST_MICROCHIP_NUMBER;
+import static com.atmostadam.cats.api.test.CatTestValues.TEST_REQUEST_ID;
+import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -62,27 +63,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
-
-        assertThat(actual.getResponse().getHeaders("requestId").get(0), Matchers.equalTo(TEST_REQUEST_ID));
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
 
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-
-        CatResponse actualCatResponse = om.readValue(actual.getResponse().getContentAsString(), CatResponse.class);
-        assertThat(actualCatResponse.getMessage(), Matchers.equalTo(CatResponseTest.testData().getMessage()));
-        assertThat(actualCatResponse.getStackTrace(), Matchers.equalTo(CatResponseTest.testData().getStackTrace()));
-
-        Cat actualCat = actualCatResponse.getCats().get(0);
-        assertThat(actualCat.getMicrochipNumber(), Matchers.equalTo(TEST_MICROCHIP_NUMBER));
-        assertThat(actualCat.getName(), Matchers.equalTo(CatTest.TEST_NAME));
-        assertThat(actualCat.getBreed(), Matchers.equalTo(CatTest.TEST_BREED));
-        assertThat(actualCat.getType(), Matchers.equalTo(CatTest.TEST_TYPE));
-        assertThat(actualCat.getPrimaryColor(), Matchers.equalTo(CatTest.TEST_PRIMARY_COLOR));
-        assertThat(actualCat.getSex(), Matchers.equalTo(CatTest.TEST_SEX));
-        assertThat(actualCat.getAge(), Matchers.equalTo(CatTest.TEST_AGE));
-        assertThat(actualCat.isDeceased(), Matchers.equalTo(CatTest.TEST_DECEASED));
-        assertThat(actualCat.isNeutered(), Matchers.equalTo(CatTest.TEST_NEUTERED));
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -98,7 +84,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -114,7 +105,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -130,7 +126,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -146,7 +147,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -162,7 +168,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -178,7 +189,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -194,7 +210,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -210,7 +231,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -226,7 +252,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -242,7 +273,12 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 
     @Test
@@ -258,6 +294,11 @@ public class CatResourceTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        assertMvcResult(actual);
+        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
+        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
+        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
+
+        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
+                CatResponseTest.EXPECTED_NODE);
     }
 }
