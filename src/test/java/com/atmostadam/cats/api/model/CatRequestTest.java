@@ -3,17 +3,20 @@ package com.atmostadam.cats.api.model;
 import com.atmostadam.cats.api.exception.CatException;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
-import com.atmostadam.cats.api.test.CatTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.atmostadam.cats.api.test.CatTestConstants.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CatRequestTest {
-    public static CatRequest testData() {
+    public static final Long TEST_MICROCHIP_NUMBER = 431654132132657L;
+    public static final Long TEST_MICROCHIP_NUMBER_2 = 431654142132657L;
+    public static final Long TEST_MICROCHIP_NUMBER_3 = 431666132132657L;
+    public static final String TEST_REQUEST_ID = "d1e2a63e-7c43-47ba-8721-ab872640b0b1";
+
+    public static final CatRequest testData() {
         return new CatRequest().addCat(CatTest.testData());
     }
 

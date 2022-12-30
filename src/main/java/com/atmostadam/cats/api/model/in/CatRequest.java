@@ -9,13 +9,12 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.atmostadam.cats.api.util.CatApiUtils.concatMicrochips;
 
 @Getter
 @Setter
@@ -57,5 +56,11 @@ public class CatRequest {
                         concatMicrochips(cats), exception.getMessage()))
                 .setStackTrace(ExceptionUtils.getStackTrace(exception))
                 .addCats(cats);
+    }
+
+    private String concatMicrochips(@NonNull List<Cat> cats) {
+        StringBuilder microchips = new StringBuilder();
+        cats.forEach(e -> microchips.append(e.getMicrochipNumber()).append(","));
+        return StringUtils.removeEnd(microchips.toString(), ",");
     }
 }

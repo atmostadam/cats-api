@@ -1,7 +1,9 @@
 package com.atmostadam.cats.api.service;
 
-public final class CatServiceNames {
-    private CatServiceNames() {}
+import java.util.List;
+
+public final class CatSpringBeanServiceNames {
+    private CatSpringBeanServiceNames() {}
 
     public static final String ONBOARD_CAT = "onboardCat";
     public static final String TRANSFER_CAT = "transferCat";
@@ -15,5 +17,17 @@ public final class CatServiceNames {
     public static final String MICROCHIP_CAT = "microchipCat";
     public static final String POST_PETFINDER_CAT = "postPetfinderCat";
     public static final String POST_ADOPT_A_PET_CAT = "postAdoptAPetCat";
-
+    public static final List<String> SERVICE_NAMES = List.of(ONBOARD_CAT,
+            TRANSFER_CAT,
+            FOSTER_CAT,
+            ADOPT_CAT,
+            QUERY_BY_MICROSERVICE_NUMBER,
+            ADD_CAT,
+            UPDATE_CAT,
+            DELETE_CAT,
+            TREAT_CAT,
+            MICROCHIP_CAT,
+            POST_PETFINDER_CAT,
+            POST_ADOPT_A_PET_CAT);
+    public static final String SERVICE_MAP = "serviceMap";
 }

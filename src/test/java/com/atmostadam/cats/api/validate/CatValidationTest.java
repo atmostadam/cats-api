@@ -1,7 +1,7 @@
 package com.atmostadam.cats.api.validate;
 
 import com.atmostadam.cats.api.model.Cat;
-import com.atmostadam.cats.api.test.CatTest;
+import com.atmostadam.cats.api.model.CatTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
