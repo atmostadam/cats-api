@@ -5,4 +5,7 @@ public class CatRuntimeException extends RuntimeException {
         super(cause);
     }
 
+    public CatRuntimeException(String message) {
+        super(message);
+    }
 }
