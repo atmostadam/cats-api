@@ -39,7 +39,7 @@ public class CatTest {
                 .setAge(TEST_AGE)
                 .setDeceased(TEST_DECEASED)
                 .setNeutered(TEST_NEUTERED);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 
     @Test

@@ -2,13 +2,11 @@ package com.atmostadam.cats.api.model;
 
 import com.atmostadam.cats.api.model.out.CatResponse;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -36,17 +34,8 @@ public class CatResponseTest {
                 .setMessage(TEST_MESSAGE)
                 .setStackTrace(TEST_STACK_TRACE)
                 .addCat(CatTest.EXPECTED);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
-
-    /*
-    public static final void assertMvcResult(MvcResult result) throws Exception {
-        assertThat(result.getResponse().getHeaders("requestId").get(0), Matchers.equalTo(TEST_REQUEST_ID));
-        assertThat(result.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-        assertThat(result.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertCatResponse(om.readValue(result.getResponse().getContentAsString(), CatResponse.class));
-    }
-    */
 
     @Test
     void addCats() {
@@ -78,7 +67,7 @@ public class CatResponseTest {
         assertThat(actual.getHeaders().get("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getHeaders().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON));
 
-        assertEquals(convertToJsonNode(actual.getBody()), CatResponseTest.EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual.getBody()));
     }
 
     @Test
@@ -93,6 +82,6 @@ public class CatResponseTest {
         assertThat(actual.getHeaders().get("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getHeaders().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON));
 
-        assertEquals(convertToJsonNode(actual.getBody()), CatResponseTest.EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual.getBody()));
     }
 }

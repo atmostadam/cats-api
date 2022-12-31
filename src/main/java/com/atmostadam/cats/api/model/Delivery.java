@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 /**
  * A JSON object that represents the delivery method of the person dropping off the cat(s).
  * <br/>

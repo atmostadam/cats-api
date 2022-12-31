@@ -35,7 +35,7 @@ public class CatRequestTest {
                 .setAdopt(AdoptTest.EXPECTED)
                 .addCat(CatTest.EXPECTED)
                 .addMicrochipNumber(TEST_MICROCHIP_NUMBER);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 
     @Test

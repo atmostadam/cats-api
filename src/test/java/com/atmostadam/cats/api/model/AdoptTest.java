@@ -1,7 +1,6 @@
 package com.atmostadam.cats.api.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import static com.atmostadam.cats.api.test.CatTestValues.*;
@@ -27,6 +26,6 @@ public class AdoptTest {
                 .setFirstName(FIRST_NAME)
                 .setLastName(LAST_NAME)
                 .setBusinessName(BUSINESS_NAME);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 }

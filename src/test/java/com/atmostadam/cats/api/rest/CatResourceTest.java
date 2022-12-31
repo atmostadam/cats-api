@@ -9,7 +9,8 @@ import com.atmostadam.cats.api.service.CatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 @SpringJUnitConfig(CatConfiguration.class)
-public class CatResourceTest {
+class CatResourceTest {
     private static final ObjectMapper om = new ObjectMapper();
 
     @Autowired
@@ -50,12 +51,21 @@ public class CatResourceTest {
         mockMvc = standaloneSetup(resource).build();
     }
 
-    @Test
-    void onboardCat() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"/cats/1.0/cat/register/onboard",
+            "/cats/1.0/cat/register/transfer",
+            "/cats/1.0/cat/register/transfer/foster",
+            "/cats/1.0/cat/register/adopt",
+            "/cats/1.0/cat",
+            "/cats/1.0/cat/process/medical",
+            "/cats/1.0/cat/process/microchip",
+            "/cats/1.0/cat/process/petfinder",
+            "/cats/1.0/cat/process/adoptapet"})
+    void postCatResource(String resource) throws Exception {
         when(service.invoke(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
 
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/register/onboard")
+        MvcResult actual = mockMvc.perform(post(resource)
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(CatRequestTest.testData())))
@@ -67,79 +77,17 @@ public class CatResourceTest {
         assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
 
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
+        assertEquals(CatResponseTest.EXPECTED_NODE,
+                convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)));
     }
 
-    @Test
-    void transferCat() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"/cats/1.0/cat"})
+    void getCatResource(String resource) throws Exception {
         when(service.invoke(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
 
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/register/transfer")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void fosterCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/register/transfer/foster")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void adoptCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/register/adopt")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void queryByMicrochipNumber() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(get("/cats/1.0/cat")
+        MvcResult actual = mockMvc.perform(get(resource)
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(new CatRequest().addMicrochipNumber(TEST_MICROCHIP_NUMBER))))
@@ -151,16 +99,17 @@ public class CatResourceTest {
         assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
 
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
+        assertEquals(CatResponseTest.EXPECTED_NODE,
+                convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)));
     }
 
-    @Test
-    void addCat() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"/cats/1.0/cat"})
+    void patchCatResource(String resource) throws Exception {
         when(service.invoke(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
 
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat")
+        MvcResult actual = mockMvc.perform(patch(resource)
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(CatRequestTest.testData())))
@@ -172,37 +121,17 @@ public class CatResourceTest {
         assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
 
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
+        assertEquals(CatResponseTest.EXPECTED_NODE,
+                convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)));
     }
 
-    @Test
-    void updateCat() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"/cats/1.0/cat"})
+    void deleteCatResource(String resource) throws Exception {
         when(service.invoke(isA(String.class), isA(CatRequest.class)))
                 .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
 
-        MvcResult actual = mockMvc.perform(patch("/cats/1.0/cat")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void deleteCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(delete("/cats/1.0/cat")
+        MvcResult actual = mockMvc.perform(delete(resource)
                         .header("requestId", TEST_REQUEST_ID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(new CatRequest().addMicrochipNumber(TEST_MICROCHIP_NUMBER))))
@@ -214,91 +143,7 @@ public class CatResourceTest {
         assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
         assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
 
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void treatCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/process/medical")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void microchipCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/process/microchip")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void postPetfinderCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/process/petfinder")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
-    }
-
-    @Test
-    void postAdoptAPetCat() throws Exception {
-        when(service.invoke(isA(String.class), isA(CatRequest.class)))
-                .thenReturn(new ResponseEntity<>(CatResponseTest.testData(), HttpStatus.OK));
-
-        MvcResult actual = mockMvc.perform(post("/cats/1.0/cat/process/adoptapet")
-                        .header("requestId", TEST_REQUEST_ID)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(om.writeValueAsString(CatRequestTest.testData())))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        assertThat(actual.getResponse().getStatus(), Matchers.equalTo(HttpStatus.OK.value()));
-        assertThat(actual.getResponse().getHeaders("requestId"), Matchers.equalTo(List.of(TEST_REQUEST_ID)));
-        assertThat(actual.getResponse().getContentType(), Matchers.equalTo(MediaType.APPLICATION_JSON.toString()));
-
-        assertEquals(convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)),
-                CatResponseTest.EXPECTED_NODE);
+        assertEquals(CatResponseTest.EXPECTED_NODE,
+                convertToJsonNode(om.readValue(actual.getResponse().getContentAsString(), CatResponse.class)));
     }
 }

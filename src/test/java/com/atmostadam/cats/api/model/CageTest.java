@@ -42,6 +42,6 @@ public class CageTest {
                 .setBuiltInWater(BUILT_IN_WATER)
                 .setBuiltInBed(BUILT_IN_BED)
                 .setConnections(CONNECTIONS);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 }

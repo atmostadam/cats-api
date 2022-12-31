@@ -19,6 +19,6 @@ public class DeliveryTest {
     void delivery() {
         Delivery actual = new Delivery()
                 .setDeliverTo(LocationTest.EXPECTED);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 }

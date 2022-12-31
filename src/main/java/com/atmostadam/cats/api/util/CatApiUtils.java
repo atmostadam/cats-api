@@ -1,5 +1,6 @@
 package com.atmostadam.cats.api.util;
 
+import com.atmostadam.cats.api.exception.CatRuntimeException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,7 +13,7 @@ public class CatApiUtils {
         try {
             return om.readTree(om.writeValueAsString(o));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new CatRuntimeException(e);
         }
     }
 }

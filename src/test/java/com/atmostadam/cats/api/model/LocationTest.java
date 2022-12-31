@@ -19,6 +19,6 @@ public class LocationTest {
     void location() {
         Location actual = new Location()
                 .setCage(CageTest.EXPECTED);
-        assertEquals(convertToJsonNode(actual), EXPECTED_NODE);
+        assertEquals(EXPECTED_NODE, convertToJsonNode(actual));
     }
 }

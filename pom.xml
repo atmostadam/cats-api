@@ -112,7 +112,6 @@
 				<configuration>
 					<outputFileName>openapi</outputFileName>
 					<outputPath>${project.build.directory}/generatedtest</outputPath>
-					<!-- <configurationFilePath>${project.basedir}/src/main/resources/configurationFile.yaml</configurationFilePath> -->
 				</configuration>
 				<executions>
 					<execution>
@@ -129,8 +128,6 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<!-- <name>cats-api</name> -->
-			<!-- <url>https://maven.pkg.github.com/atmostadam/cats-api</url> -->
 		</repository>
 	</distributionManagement>
 </project>

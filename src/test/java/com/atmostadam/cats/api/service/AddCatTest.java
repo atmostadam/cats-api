@@ -1,8 +1,23 @@
 package com.atmostadam.cats.api.service;
 
-import com.atmostadam.cats.api.service.CatSpringBeanServiceNames;
+import com.atmostadam.cats.api.configuration.CatConfiguration;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Service(CatSpringBeanServiceNames.ADD_CAT)
-public class AddCatTest extends CatServiceTest {
+@SpringJUnitConfig(CatConfiguration.class)
+class AddCatTest extends CatServiceTest {
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @Test
+    void validateInjection() {
+        // Test Injection for Sonarqube.
+        assertTrue(applicationContext.containsBean(CatSpringBeanServiceNames.ADD_CAT));
+    }
 }
