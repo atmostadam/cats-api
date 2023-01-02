@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
-import static com.atmostadam.cats.api.test.CatTestValues.TEST_MICROCHIP_NUMBER;
-import static com.atmostadam.cats.api.test.CatTestValues.TEST_REQUEST_ID;
+import static com.atmostadam.cats.api.util.CatDefaultValues.TEST_MICROCHIP_NUMBER;
+import static com.atmostadam.cats.api.util.CatDefaultValues.TEST_REQUEST_ID;
 import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
