@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.atmostadam.cats.api.util.CatDefaultValues.*;
-import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
+import static com.atmostadam.cats.api.test.CatDefaultValues.*;
+import static com.atmostadam.cats.api.util.CatApiUtilsTest.convertToJsonNode;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

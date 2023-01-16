@@ -1,11 +1,10 @@
-package com.atmostadam.cats.api.util;
+package com.atmostadam.cats.api.test;
 
 import com.atmostadam.cats.api.entity.CatEntity;
 import com.atmostadam.cats.api.exception.CatRuntimeException;
 import com.atmostadam.cats.api.model.*;
 import com.atmostadam.cats.api.model.in.CatRequest;
 import com.atmostadam.cats.api.model.out.CatResponse;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-
-import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
 
 public final class CatDefaultValues {
     private CatDefaultValues() {}
@@ -127,16 +124,6 @@ public final class CatDefaultValues {
                 .setMessage(TEST_MESSAGE)
                 .setStackTrace(TEST_STACK_TRACE)
                 .addCat(catTestData());
-    }
-
-    public static JsonNode catResponseNodeTestData() {
-        return convertToJsonNode(catResponseTestData());
-    }
-
-    public static JsonNode catResponseNodeTestData(String message) {
-        return convertToJsonNode(new CatResponse()
-                .setMessage(message)
-                .addCat(catTestData()));
     }
 
     public static ResponseEntity<CatResponse> responseEntityTestData() {

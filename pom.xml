@@ -18,7 +18,7 @@
     </parent>
 
 	<properties>
-		<revision>0.0.36</revision>
+		<revision>0.0.40</revision>
 		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springfox.version>3.0.0</springfox.version>

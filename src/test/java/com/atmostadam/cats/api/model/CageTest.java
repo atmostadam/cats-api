@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
-import static com.atmostadam.cats.api.util.CatDefaultValues.*;
-import static com.atmostadam.cats.api.util.CatDefaultValues.TEST_MAX_CATS;
+import static com.atmostadam.cats.api.util.CatApiUtilsTest.convertToJsonNode;
+import static com.atmostadam.cats.api.test.CatDefaultValues.*;
+import static com.atmostadam.cats.api.test.CatDefaultValues.TEST_MAX_CATS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CageTest {

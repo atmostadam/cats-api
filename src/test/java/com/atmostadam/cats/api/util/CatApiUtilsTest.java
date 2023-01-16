@@ -1,19 +1,20 @@
 package com.atmostadam.cats.api.util;
 
-import org.junit.jupiter.api.Test;
+import com.atmostadam.cats.api.exception.CatRuntimeException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static com.atmostadam.cats.api.util.CatApiUtils.catEquals;
-import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
-import static com.atmostadam.cats.api.util.CatDefaultValues.catResponseTestData;
-
-public class CatApiUtilsTest {
-    @Test
-    void catEqualsCatResponse() {
-        catEquals(catResponseTestData(), catResponseTestData());
+public final class CatApiUtilsTest {
+    private CatApiUtilsTest() {
     }
 
-    @Test
-    void catEqualsJsonNode() {
-        catEquals(convertToJsonNode(catResponseTestData()), convertToJsonNode(catResponseTestData()));
+    private static final ObjectMapper om = new ObjectMapper();
+
+    public static final JsonNode convertToJsonNode(Object o) {
+        try {
+            return om.readTree(om.writeValueAsString(o));
+        } catch (Exception e) {
+            throw new CatRuntimeException(e);
+        }
     }
 }

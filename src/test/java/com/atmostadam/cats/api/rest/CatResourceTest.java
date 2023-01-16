@@ -1,6 +1,7 @@
 package com.atmostadam.cats.api.rest;
 
 import com.atmostadam.cats.api.configuration.CatConfiguration;
+import com.atmostadam.cats.api.configuration.CatConfigurationTest;
 import com.atmostadam.cats.api.model.CatRequestTest;
 import com.atmostadam.cats.api.model.CatResponseTest;
 import com.atmostadam.cats.api.model.in.CatRequest;
@@ -22,9 +23,9 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
-import static com.atmostadam.cats.api.util.CatDefaultValues.TEST_MICROCHIP_NUMBER;
-import static com.atmostadam.cats.api.util.CatDefaultValues.TEST_REQUEST_ID;
-import static com.atmostadam.cats.api.util.CatApiUtils.convertToJsonNode;
+import static com.atmostadam.cats.api.test.CatDefaultValues.TEST_MICROCHIP_NUMBER;
+import static com.atmostadam.cats.api.test.CatDefaultValues.TEST_REQUEST_ID;
+import static com.atmostadam.cats.api.util.CatApiUtilsTest.convertToJsonNode;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.isA;
@@ -34,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
-@SpringJUnitConfig(CatConfiguration.class)
+@SpringJUnitConfig(CatConfigurationTest.class)
 class CatResourceTest {
     private static final ObjectMapper om = new ObjectMapper();
 
