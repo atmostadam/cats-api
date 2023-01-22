@@ -1,3 +1,13 @@
+## Vision
+1. To fill a gap that exists where Therapy Cats are only being offered to hospitals and treatment centers. There are currently an insufficient number of Therapy Cats in the United States to be offered to individuals in need of care.
+
+## Technical Objective
+1. To compare the performance of modern Java workflow engines and workflow design patterns.
+2. To expand Adam's knowledge base and skill set by prototyping programming design patterns, technologies, libraries, frameworks and languages
+3. To demo and showcase Adam's existing capabilities
+
+
+
 Adam's Personal GitHub Prototyping Repositories and Demo Showcase
 
 The Cat Repositories are conceptually linked by the vision of a Charity dedicated to the care of Cats in need.
