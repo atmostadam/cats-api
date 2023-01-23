@@ -24,6 +24,11 @@ The cats-api project specifically creates the interface agreements between compo
 ## Notes
 I understand that not everything in this repository meets Martin Fowler or other industry expert's definition of design vs implementation, but this is my best way to compare and contrast technology frameworks as we look for the next latest and greatest frameworks, runes engines and workflow engines.
 
+## Related Projects
+* <https://github.com/atmostadam/cats-api>
+* <https://github.com/atmostadam/cats-framework>
+* <https://github.com/atmostadam/cats-spring-boot>
+
 ## Contact Information:
 I try to spend at least a few hours a week trying to keep up my technical skillset via prototyping.
 
