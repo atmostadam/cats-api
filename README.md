@@ -14,8 +14,10 @@ The cats-api project specifically creates the interface agreements between compo
 - RESTful APIs
 - Database Entity Definitions
 - Data Models
-- Rules Capabilities
-- Orchestration Capabilities
+- Rules Engine
+- Orchestration
+- Workflow Engine
+- Thread Pool
 - Java
 - Spring Boot
 - RESTful Services
@@ -28,6 +30,8 @@ I understand that not everything in this repository meets Martin Fowler or other
 * <https://github.com/atmostadam/cats-api>
 * <https://github.com/atmostadam/cats-framework>
 * <https://github.com/atmostadam/cats-spring-boot>
+* <https://github.com/atmostadam/cats-drools>
+* <https://github.com/atmostadam/cats-jbpm>
 
 ## Contact Information:
 I try to spend at least a few hours a week trying to keep up my technical skillset via prototyping.

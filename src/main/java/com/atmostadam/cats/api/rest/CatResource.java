@@ -6,8 +6,6 @@ import com.atmostadam.cats.api.service.CatService;
 import com.atmostadam.cats.api.service.CatSpringBeanServiceNames;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -22,7 +20,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/cats/1.0/cat", consumes = "application/json", produces = "application/json")
-@Api(tags = { "Cats API", "Cat Charity Organization", "Demo", "Showcase", "Prototype" })
 public class CatResource {
     public static final Logger logger = LoggerFactory.getLogger(CatResource.class);
     public static final ObjectMapper om = new ObjectMapper();
@@ -31,84 +28,84 @@ public class CatResource {
     private Map<String, CatService> serviceMap;
 
     @GetMapping
-    @ApiOperation("This API queries for a cat by microchip number internally within our system.")
+    // This API queries for a cat by microchip number internally within our system.
     public ResponseEntity<CatResponse> queryByMicrochipNumber(@RequestHeader(value = "requestId") String requestId,
                                                        @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.QUERY_BY_MICROSERVICE_NUMBER, requestId, request);
     }
 
     @PostMapping
-    @ApiOperation("This API adds a cat or list of cats internally within our system.")
+    // This API adds a cat or list of cats internally within our system.
     public ResponseEntity<CatResponse> addCat(@RequestHeader(value = "requestId") String requestId,
                                        @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.ADD_CAT, requestId, request);
     }
 
     @PatchMapping
-    @ApiOperation("This API updates a cat or list of cats internally within our system.")
+    // This API updates a cat or list of cats internally within our system.
     public ResponseEntity<CatResponse> updateCat(@RequestHeader(value = "requestId") String requestId,
                                           @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.UPDATE_CAT, requestId, request);
     }
 
     @DeleteMapping
-    @ApiOperation("This API deletes a cat by microchip number internally within our system.")
+    // This API deletes a cat by microchip number internally within our system.
     public ResponseEntity<CatResponse> deleteCat(@RequestHeader(value = "requestId") String requestId,
                                           @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.DELETE_CAT, requestId, request);
     }
 
     @PostMapping(value = "/register/onboard")
-    @ApiOperation("This API onboards a new cat or list of cats into the foster system of our charity.")
+    // This API onboards a new cat or list of cats into the foster system of our charity.
     public ResponseEntity<CatResponse> onboardCat(@RequestHeader(value = "requestId") String requestId,
                                            @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.ONBOARD_CAT, requestId, request);
     }
 
     @PostMapping(value = "/register/transfer")
-    @ApiOperation("This API transfers a cat or list of cats from one location to another.")
+    // This API transfers a cat or list of cats from one location to another.
     public ResponseEntity<CatResponse> transferCat(@RequestHeader(value = "requestId") String requestId,
                                             @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.TRANSFER_CAT, requestId, request);
     }
 
     @PostMapping(value = "/register/transfer/foster")
-    @ApiOperation("This API transfers a cat or list of cats to a foster home.")
+    // This API transfers a cat or list of cats to a foster home.
     public ResponseEntity<CatResponse> fosterCat(@RequestHeader(value = "requestId") String requestId,
                                           @Valid @RequestBody CatRequest request){
         return invokeService(CatSpringBeanServiceNames.FOSTER_CAT, requestId, request);
     }
 
     @PostMapping(value = "/register/adopt")
-    @ApiOperation("This API adopts a cat or list of cats to a new guardian.")
+    // This API adopts a cat or list of cats to a new guardian.
     public ResponseEntity<CatResponse> adoptCat(@RequestHeader(value = "requestId") String requestId,
                                          @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.ADOPT_CAT, requestId, request);
     }
 
     @PostMapping(value = "/process/medical")
-    @ApiOperation("This API treats a cat or list of cats for one or more diseases.")
+    // This API treats a cat or list of cats for one or more diseases.
     public ResponseEntity<CatResponse> treatCat(@RequestHeader(value = "requestId") String requestId,
                                          @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.TREAT_CAT, requestId, request);
     }
 
     @PostMapping(value = "/process/microchip")
-    @ApiOperation("This API microchips a cat or list of cats.")
+    // This API microchips a cat or list of cats.
     public ResponseEntity<CatResponse> microchipCat(@RequestHeader(value = "requestId") String requestId,
                                              @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.MICROCHIP_CAT, requestId, request);
     }
 
     @PostMapping(value = "/process/petfinder")
-    @ApiOperation("This API posts a cat or list of cats to Petfinder.")
+    // This API posts a cat or list of cats to Petfinder.
     public ResponseEntity<CatResponse> postPetfinderCat(@RequestHeader(value = "requestId") String requestId,
                                                  @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.POST_PETFINDER_CAT, requestId, request);
     }
 
     @PostMapping(value = "/process/adoptapet")
-    @ApiOperation("This API posts a cat or list of cats to Adopt-A-Pet.")
+    // This API posts a cat or list of cats to Adopt-A-Pet.
     public ResponseEntity<CatResponse> postAdoptAPetCat(@RequestHeader(value = "requestId") String requestId,
                                                  @Valid @RequestBody CatRequest request) {
         return invokeService(CatSpringBeanServiceNames.POST_ADOPT_A_PET_CAT, requestId, request);
